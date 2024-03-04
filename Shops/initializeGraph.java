@@ -1,12 +1,8 @@
 package Shops;
 
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 
 public class initializeGraph {
     private Map<String, ArrayList<weightedGraph>> adjList = new HashMap<>();
@@ -51,23 +47,29 @@ public class initializeGraph {
     }
 
     public void initializeShops() {
-        addVertex("Pet Care Manila");
-        addVertex("Pet Care Quezon");
-        addVertex("Pet Care Makati");
-        addVertex("Pet Care Taguig");
-        addVertex("Pet Care Caloocan");
-
-        addEdge("Pet Care Manila", "Pet Care Quezon", 5);
-        addEdge("Pet Care Manila", "Pet Care Makati", 10);
-        addEdge("Pet Care Makati", "Pet Care Taguig", 3);
-        addEdge("Pet Care Taguig", "Pet Care Caloocan", 15);
+        addVertex("Pet Care: MANILA"); //root
+        addVertex("Pet Care: MAKATI");
+        addVertex("Pet Care: TAGUIG");
+        addVertex("Pet Care: MANDALUYONG");
+        addVertex("Pet Care: MARKINA");// destination
+        //MANILA CONNECTIONS
+        addEdge("Pet Care: MANILA","Pet Care: MAKATI",3 );
+        addEdge("Pet Care: MANILA","Pet Care: TAGUIG",5 );
+        addEdge("Pet Care: MANILA","Pet Care: MARIKINA",24 );
+        // MAKATI CONNECTIONS
+        addEdge("Pet Care: MAKATI","Pet Care: MANDALUYONG",2 );
+        // TAGUIG CONNECTIONS
+        addEdge("Pet Care: TAGUIG","Pet Care: MARIKINA",15 );
+        // MANDALUYONG CONNECTIONS
+        addEdge("Pet Care: MANDALUYONG","Pet Care: MARIKINA",7 );
     }
     // visits the neighboring verticies 
     // ideal when looking for the nearest branch
-    public void breadthFirstSearch(String startVertex) {
+    // BFS
+    public void nearestShop(String startVertex) {
     }
-    // goes as far as possible
-    public void depthFirstSearch(String startVertex){
+    // DFS
+    public void farthestShop(String startVertex){
         
     }
     public void printGraph() {
