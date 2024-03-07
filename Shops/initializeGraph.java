@@ -21,9 +21,14 @@ public class initializeGraph {
         }
 
         @Override
-        // ovveride the toString from Object class  
+        // ovveride the toString from Object class
         public String toString() {
             return "(" + vertex + ", " + weight + ")";
+        }
+
+        // return weight?
+        public int getWeight() {
+            return weight;
         }
     }
 
@@ -47,31 +52,32 @@ public class initializeGraph {
     }
 
     public void initializeShops() {
-        addVertex("Pet Care: MANILA"); //root
-        addVertex("Pet Care: MAKATI");
-        addVertex("Pet Care: TAGUIG");
-        addVertex("Pet Care: MANDALUYONG");
-        addVertex("Pet Care: MARKINA");// destination
-        //MANILA CONNECTIONS
-        addEdge("Pet Care: MANILA","Pet Care: MAKATI",3 );
-        addEdge("Pet Care: MANILA","Pet Care: TAGUIG",5 );
-        addEdge("Pet Care: MANILA","Pet Care: MARIKINA",24 );
-        // MAKATI CONNECTIONS
-        addEdge("Pet Care: MAKATI","Pet Care: MANDALUYONG",2 );
-        // TAGUIG CONNECTIONS
-        addEdge("Pet Care: TAGUIG","Pet Care: MARIKINA",15 );
-        // MANDALUYONG CONNECTIONS
-        addEdge("Pet Care: MANDALUYONG","Pet Care: MARIKINA",7 );
+        addVertex("MANILA");
+        addVertex("MAKATI");
+        addVertex("TAGUIG");
+        addVertex("QUEZON CITY");
+        addVertex("PASIG");
+        addVertex("MANDALUYONG");
+        addVertex("MARIKINA");
+
+        addEdge("MANILA", "QUEZON CITY", 13);
+        addEdge("MANILA", "MAKATI", 25);
+        addEdge("MANILA", "MANDALUYONG", 12);
+
+        addEdge("MAKATI", "TAGUIG", 36);
+        addEdge("MAKATI", "MANDALUYONG", 13);
+
+        addEdge("MANDALUYONG", "QUEZON CITY", 21);
+        addEdge("MANDALUYONG", "TAGUIG", 37);
+
+        addEdge("TAGUIG", "PASIG", 14);
+
+        addEdge("QUEZON CITY", "MARIKINA", 25);
+
+        addEdge("MARIKINA", "PASIG", 19);
+
     }
-    // visits the neighboring verticies 
-    // ideal when looking for the nearest branch
-    // BFS
-    public void nearestShop(String startVertex) {
-    }
-    // DFS
-    public void farthestShop(String startVertex){
-        
-    }
+
     public void printGraph() {
         for (Map.Entry<String, ArrayList<weightedGraph>> entries : adjList.entrySet()) {
             System.out.println(entries.getKey() + "=" + entries.getValue() + "\n");
