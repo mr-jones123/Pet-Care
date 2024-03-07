@@ -1,12 +1,8 @@
 package Shops;
 
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 
 public class initializeGraph {
     private Map<String, ArrayList<weightedGraph>> adjList = new HashMap<>();
@@ -25,9 +21,14 @@ public class initializeGraph {
         }
 
         @Override
-        // ovveride the toString from Object class  
+        // ovveride the toString from Object class
         public String toString() {
             return "(" + vertex + ", " + weight + ")";
+        }
+
+        // return weight?
+        public int getWeight() {
+            return weight;
         }
     }
 
@@ -51,25 +52,32 @@ public class initializeGraph {
     }
 
     public void initializeShops() {
-        addVertex("Pet Care Manila");
-        addVertex("Pet Care Quezon");
-        addVertex("Pet Care Makati");
-        addVertex("Pet Care Taguig");
-        addVertex("Pet Care Caloocan");
+        addVertex("MANILA");
+        addVertex("MAKATI");
+        addVertex("TAGUIG");
+        addVertex("QUEZON CITY");
+        addVertex("PASIG");
+        addVertex("MANDALUYONG");
+        addVertex("MARIKINA");
 
-        addEdge("Pet Care Manila", "Pet Care Quezon", 5);
-        addEdge("Pet Care Manila", "Pet Care Makati", 10);
-        addEdge("Pet Care Makati", "Pet Care Taguig", 3);
-        addEdge("Pet Care Taguig", "Pet Care Caloocan", 15);
+        addEdge("MANILA", "QUEZON CITY", 13);
+        addEdge("MANILA", "MAKATI", 25);
+        addEdge("MANILA", "MANDALUYONG", 12);
+
+        addEdge("MAKATI", "TAGUIG", 36);
+        addEdge("MAKATI", "MANDALUYONG", 13);
+
+        addEdge("MANDALUYONG", "QUEZON CITY", 21);
+        addEdge("MANDALUYONG", "TAGUIG", 37);
+
+        addEdge("TAGUIG", "PASIG", 14);
+
+        addEdge("QUEZON CITY", "MARIKINA", 25);
+
+        addEdge("MARIKINA", "PASIG", 19);
+
     }
-    // visits the neighboring verticies 
-    // ideal when looking for the nearest branch
-    public void breadthFirstSearch(String startVertex) {
-    }
-    // goes as far as possible
-    public void depthFirstSearch(String startVertex){
-        
-    }
+
     public void printGraph() {
         for (Map.Entry<String, ArrayList<weightedGraph>> entries : adjList.entrySet()) {
             System.out.println(entries.getKey() + "=" + entries.getValue() + "\n");
