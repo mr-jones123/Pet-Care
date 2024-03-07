@@ -77,19 +77,63 @@ public class dogClass extends superClass implements interfaceClass {
 
     @Override
     public void printDescription() {
-        System.out.println(
-                "TEST - For checkup and quick test for your dog. This service includes a comprehensive examination of your dog's health, including physical examination, blood tests, and diagnostics if necessary. "
-                        +
-                        "It is designed to detect any potential health issues and provide early intervention. Our experienced veterinarians will ensure that your dog receives the best care and attention during the testing process. "
-                        +
-                        "Regular checkups and tests are essential for maintaining your dog's overall well-being and preventing any potential health problems.");
+        System.out.println("TESTS AND MEDICAL SERVICES DESCRIPTION");
+        System.out.println("=======================================");
         System.out.println();
-        System.out.println(
-                "EMERGENCY SERVICES - For surgeries and other medical services. Our emergency services are available 24/7 to provide immediate medical attention to your cat in critical situations. "
-                        +
-                        "Our skilled veterinarians and medical staff are trained to handle emergencies and perform life-saving procedures. Whether it's a serious injury, sudden illness, or any other emergency, "
-                        +
-                        "you can rely on our team to provide prompt and effective care.");
+    
+        // Routine Checkup
+        System.out.println("Routine Checkup:");
+        System.out.println("For a regular checkup and quick assessment of your cat's health. This service includes:");
+        System.out.println("  - Physical examination");
+        System.out.println("  - Blood tests");
+        System.out.println("  - Diagnostic procedures if necessary");
+        System.out.println("It is designed to detect potential health issues and provide early intervention.");
+        System.out.println("Regular checkups are essential for maintaining your cat's overall well-being.");
+        System.out.println();
+    
+        // Physical Exams
+        System.out.println("Physical Exams:");
+        System.out.println("A comprehensive examination of your cat's physical health, including:");
+        System.out.println("  - Thorough physical examination");
+        System.out.println("  - Assessment of vital signs");
+        System.out.println("  - Evaluation of overall body condition");
+        System.out.println("Physical exams help identify any abnormalities and ensure your cat's good health.");
+        System.out.println();
+    
+        // Dental Checkups
+        System.out.println("Dental Checkups:");
+        System.out.println("Specialized care for your cat's dental health, including:");
+        System.out.println("  - Dental examination");
+        System.out.println("  - Teeth cleaning and scaling");
+        System.out.println("  - Evaluation of oral hygiene");
+        System.out.println("Maintaining dental health is crucial for preventing dental issues in your cat.");
+        System.out.println();
+    
+        // Allergy Testing
+        System.out.println("Allergy Testing:");
+        System.out.println("Identification of potential allergies through:");
+        System.out.println("  - Allergy testing procedures");
+        System.out.println("  - Evaluation of allergic reactions");
+        System.out.println("Knowing your cat's allergies helps in providing a safe and comfortable environment.");
+        System.out.println();
+    
+        // Geriatric Screening
+        System.out.println("Geriatric Screening:");
+        System.out.println("Specialized screening for older cats to detect age-related health issues, including:");
+        System.out.println("  - Comprehensive health assessment");
+        System.out.println("  - Diagnostic tests for geriatric conditions");
+        System.out.println("Regular geriatric screening is essential for the well-being of aging cats.");
+        System.out.println();
+    
+        // Emergency Services
+        System.out.println("EMERGENCY SERVICES:");
+        System.out.println("For critical situations requiring immediate medical attention:");
+        System.out.println("  - Bloodwork, X-Rays, Ultrasounds, Oxygen Therapy, Emergency Surgery");
+        System.out.println("Our emergency services are available 24/7 to provide prompt and effective care.");
+        System.out.println("Our skilled veterinarians and medical staff are trained to handle emergencies.");
+        System.out.println("Whether it's a serious injury, sudden illness, or any other emergency, rely on our team.");
+        System.out.println();
+    
     }
 
     @Override
@@ -122,20 +166,95 @@ public class dogClass extends superClass implements interfaceClass {
         pressEnterToContinue();
     } 
     private void printDogMedicalTests() {
-        System.out.println("AVAILABLE TEST FOR DOGS: ");
+        System.out.println("AVAILABLE TESTS FOR DOGS:");
         System.out.println();
-        for (Map.Entry<String, Integer> entries : dogMedicalTests.entrySet()) {
-            System.out.println(entries.getKey() + "  $" + entries.getValue());
-        }
+    
+        // Routine Checkup
+        System.out.println("1. Routine Checkup:");
+        System.out.println("   A regular checkup and quick assessment of your dog's health, including:");
+        System.out.println("   - INCLUSION:");
+        System.out.println("   - Physical examination");
+        System.out.println("   - Blood tests");
+        System.out.println("   - Diagnostic procedures if necessary");
+        System.out.println("   Designed to detect potential health issues and provide early intervention.");
+        System.out.println("   - $50.00");
+        System.out.println();
+    
+        // Physical Exams
+        System.out.println("2. Physical Exams:");
+        System.out.println("   A comprehensive examination of your dog's physical health, including:");
+        System.out.println("   - INCLUSION:");
+        System.out.println("   - Thorough physical examination");
+        System.out.println("   - Assessment of vital signs");
+        System.out.println("   - Evaluation of overall body condition");
+        System.out.println("   Ensures the identification of any abnormalities and maintains your dog's good health.");
+        System.out.println("   - $60.00");
+        System.out.println();
+    
+        // Dental Checkups
+        System.out.println("3. Dental Checkups:");
+        System.out.println("   Specialized care for your dog's dental health, including:");
+        System.out.println("   - INCLUSION:");
+        System.out.println("   - Dental examination");
+        System.out.println("   - Teeth cleaning and scaling");
+        System.out.println("   - Evaluation of oral hygiene");
+        System.out.println("   Crucial for preventing dental issues and maintaining your dog's overall well-being.");
+        System.out.println("   - $70.00");
+        System.out.println();
+    
+        // Allergy Testing
+        System.out.println("4. Allergy Testing:");
+        System.out.println("   Identification of potential allergies through:");
+        System.out.println("   - INCLUSION:");
+        System.out.println("   - Allergy testing procedures");
+        System.out.println("   - Evaluation of allergic reactions");
+        System.out.println("   Knowledge about your dog's allergies helps provide a safe and comfortable environment.");
+        System.out.println("   - $80.00");
+        System.out.println();
+    
+        // Geriatric Screening
+        System.out.println("5. Geriatric Screening:");
+        System.out.println("   Specialized screening for older dogs to detect age-related health issues, including:");
+        System.out.println("   - INCLUSION:");
+        System.out.println("   - Comprehensive health assessment");
+        System.out.println("   - Diagnostic tests for geriatric conditions");
+        System.out.println("   Regular geriatric screening is essential for the well-being of aging dogs.");
+        System.out.println("   - $90.00");
+        System.out.println();
     }
+    
 
     private void printDogMedicalServices() {
-        System.out.println("AVAILABLE MEDICAL SERVICES FOR DOGS: ");
+        System.out.println("AVAILABLE EMERGENCY SERVICES FOR DOGS:");
         System.out.println();
-        for (Map.Entry<String, Integer> entries : dogMedicalServices.entrySet()) {
-            System.out.println(entries.getKey() + "  $" + entries.getValue());
-        }
+    
+        // Emergency Surgery
+        System.out.println("1. Emergency Surgery");
+        System.out.println("   Description: Immediate surgical intervention for critical health conditions.");
+        System.out.println("   - Price: $5000.00");
+        System.out.println();
+    
+        // Intensive Care Unit (ICU)
+        System.out.println("2. Intensive Care Unit (ICU)");
+        System.out.println("   Description: 24/7 critical care monitoring and medical support.");
+        System.out.println("   - Price: $3000.00");
+        System.out.println();
+    
+        // Diagnostic Imaging
+        System.out.println("3. Diagnostic Imaging");
+        System.out.println("   Description: Advanced imaging tests for accurate diagnosis.");
+        System.out.println("   - Price: $1500.00");
+        System.out.println();
+    
+        // Blood Transfusion
+        System.out.println("4. Blood Transfusion");
+        System.out.println("   Description: Emergency blood transfusion for severe cases of blood loss.");
+        System.out.println("   - Price: $2000.00");
+        System.out.println();
+    
+        // Add more emergency services as needed
     }
+    
 
     private void longPause() {
         try {
