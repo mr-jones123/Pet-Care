@@ -6,8 +6,6 @@ public class mainMenu {
     catClass Cat = new catClass();
     dogClass Dog = new dogClass();
     Scanner scan = new Scanner(System.in);
-    private int choice;
-
     public void MainDisplayServices() {
         int choice;
         do {

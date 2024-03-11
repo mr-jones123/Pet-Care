@@ -1,7 +1,12 @@
 package Shops;
 
 import java.util.Map;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class initializeGraph {
@@ -60,27 +65,53 @@ public class initializeGraph {
         addVertex("MANDALUYONG");
         addVertex("MARIKINA");
 
-        addEdge("MANILA", "QUEZON CITY", 13);
-        addEdge("MANILA", "MAKATI", 25);
+        addEdge("MANILA", "QUEZON CITY", 10);
+        addEdge("MANILA", "MAKATI", 6);
         addEdge("MANILA", "MANDALUYONG", 12);
 
-        addEdge("MAKATI", "TAGUIG", 36);
-        addEdge("MAKATI", "MANDALUYONG", 13);
+        addEdge("MAKATI", "TAGUIG", 3 );
+        addEdge("MAKATI", "MANDALUYONG", 4);
 
-        addEdge("MANDALUYONG", "QUEZON CITY", 21);
-        addEdge("MANDALUYONG", "TAGUIG", 37);
+        addEdge("MANDALUYONG", "QUEZON CITY", 7);
+        addEdge("MANDALUYONG", "TAGUIG", 8);
+        addEdge("MANDALUYONG", "PASIG", 14);
 
-        addEdge("TAGUIG", "PASIG", 14);
+        addEdge("TAGUIG", "PASIG", 5);
 
-        addEdge("QUEZON CITY", "MARIKINA", 25);
+        addEdge("QUEZON CITY", "MARIKINA", 9);
 
-        addEdge("MARIKINA", "PASIG", 19);
+        addEdge("MARIKINA", "PASIG", 7 );
 
     }
+    //minimum spanning tree 
+    public List<weightedGraph> primMST(String startVertex){
+        // stores the list of weighted graph 
+        List<weightedGraph> result = new ArrayList<>();
+        // checks the visited nodes
+        Set<String> visited = new HashSet<>();
+        // priority queue
+        // comparator sorts the objects, in this case, sorts the weights
+        PriorityQueue<weightedGraph> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(weightedGraph::getWeight));    
+        visited.add(startVertex);
+        priorityQueue.addAll(adjList.get(startVertex));
+        while (!priorityQueue.isEmpty()){
+            weightedGraph currentEdge = priorityQueue.poll();
+            String currentVertex = currentEdge.vertex;  
+            if (!visited.contains(currentVertex)){
+                visited.add(currentVertex);
+                result.add(currentEdge);
 
+                ArrayList<weightedGraph> neighbors = adjList.get(currentVertex);
+                priorityQueue.addAll(neighbors);
+            }
+        }
+    return result;
+
+    }
     public void printGraph() {
-        for (Map.Entry<String, ArrayList<weightedGraph>> entries : adjList.entrySet()) {
-            System.out.println(entries.getKey() + "=" + entries.getValue() + "\n");
+        List<weightedGraph> mst = new ArrayList<>(primMST("MANILA"));
+        for (weightedGraph edge : mst){
+            System.out.println(edge);
         }
     }
 }

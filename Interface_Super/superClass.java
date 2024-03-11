@@ -1,8 +1,9 @@
 package Interface_Super;
+import java.util.Map;
 import java.util.HashMap;
 public class superClass {
-    private HashMap<String, Integer> tests = new HashMap<>();
-    private HashMap<String, Integer>  medicalServices  = new HashMap<>();
+    private Map<Integer, Integer> tests = new HashMap<>();
+    private Map<Integer, Integer>  medicalServices  = new HashMap<>();
 
     public superClass(){
         initializeDefaultTests();
@@ -10,23 +11,23 @@ public class superClass {
     }
 
     public void initializeDefaultTests(){
-        tests.put("Routine Checkup", 50);
-        tests.put("Physical Exams", 45);
-        tests.put("Dental Checkups", 70);
-        tests.put("Allergy Testing", 300);   
-        tests.put("Geriatic Screening", 110);
+        tests.put(1, 50);
+        tests.put(2, 45);
+        tests.put(3, 70);
+        tests.put(4, 300);   
+        tests.put(5, 110);
     }
     public void initializeDefaultMedicalServices(){
-        medicalServices.put("Bloodwork", 200);
-        medicalServices.put("X-Rays", 150);
-        medicalServices.put("Ultrasounds", 600);
-        medicalServices.put("Oxygen Therapy", 3000);
-        medicalServices.put("Emergency Surgery", 5000);
+        medicalServices.put(1, 200);
+        medicalServices.put(2 , 150);
+        medicalServices.put(3, 600);
+        medicalServices.put(4, 3000);
+        medicalServices.put(5, 5000);
     }
-    public HashMap <String, Integer> getTests(){
+    public Map <Integer, Integer> getTests(){
         return tests;
     }
-    public HashMap <String, Integer> getMedicalServices(){
+    public Map <Integer, Integer> getMedicalServices(){
         return medicalServices;
     }
 }

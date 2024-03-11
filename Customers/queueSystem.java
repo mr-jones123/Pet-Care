@@ -1,13 +1,8 @@
 package Customers;
 import java.util.Queue;
-import java.util.HashMap;
 import java.util.LinkedList;
 public class queueSystem {
-    private customerSystem Customer = new customerSystem();
-
     private static Queue <Integer> customerID = new LinkedList<>();
-    private HashMap <String, Integer> customers = new HashMap<>(Customer.getCustomers());   
-
     public void addCustomerToQueue(int customerCode){
         customerID.add(customerCode);
     }
