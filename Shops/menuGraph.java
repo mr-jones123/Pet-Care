@@ -18,19 +18,19 @@ public class menuGraph {
                 ch = scan.nextInt();
                 switch (ch) {
                     case 1:
-                        //STARTS IN MANILA
+                        Graph.printGraph("MANILA");
                         break;
                     case 2:
-                        //STARTS IN MAKATI
+                    Graph.printGraph("MAKATI");
                         break;
                     case 3:
-                        //STARTS IN TAGUIG
+                    Graph.printGraph("TAGUIG");
                         break;
                     case 4: 
-                        //STARTS IN MANDALUYONG
+                    Graph.printGraph("MANDALUYONG");
                         break;
                     case 5:
-                        //STARTS IN MARIKINA
+                    Graph.printGraph("MARIKINA");
                         break;
                     default:
                         break;
