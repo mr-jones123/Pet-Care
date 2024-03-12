@@ -1,7 +1,12 @@
 package Shops;
 
 import java.util.Map;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class initializeGraph {
@@ -32,7 +37,7 @@ public class initializeGraph {
         }
     }
 
-    public void addVertex(String vertex) {
+    private void addVertex(String vertex) {
         // if the vertex does not exist, we add the new one
         if (adjList.get(vertex) == null) {
             adjList.put(vertex, new ArrayList<weightedGraph>());
@@ -41,7 +46,7 @@ public class initializeGraph {
         }
     }
 
-    public void addEdge(String vertex1, String vertex2, int weight) {
+    private void addEdge(String vertex1, String vertex2, int weight) {
         // if the vertices exist, then we add edges
         if (adjList.get(vertex1) != null && adjList.get(vertex2) != null) {
             adjList.get(vertex1).add(new weightedGraph(vertex2, weight));
@@ -51,7 +56,7 @@ public class initializeGraph {
         }
     }
 
-    public void initializeShops() {
+    private void initializeShops() {
         addVertex("MANILA");
         addVertex("MAKATI");
         addVertex("TAGUIG");
@@ -60,27 +65,58 @@ public class initializeGraph {
         addVertex("MANDALUYONG");
         addVertex("MARIKINA");
 
-        addEdge("MANILA", "QUEZON CITY", 13);
-        addEdge("MANILA", "MAKATI", 25);
+        addEdge("MANILA", "QUEZON CITY", 10);
+        addEdge("MANILA", "MAKATI", 6);
         addEdge("MANILA", "MANDALUYONG", 12);
 
-        addEdge("MAKATI", "TAGUIG", 36);
-        addEdge("MAKATI", "MANDALUYONG", 13);
+        addEdge("MAKATI", "TAGUIG", 3);
+        addEdge("MAKATI", "MANDALUYONG", 4);
 
-        addEdge("MANDALUYONG", "QUEZON CITY", 21);
-        addEdge("MANDALUYONG", "TAGUIG", 37);
+        addEdge("MANDALUYONG", "QUEZON CITY", 7);
+        addEdge("MANDALUYONG", "TAGUIG", 8);
+        addEdge("MANDALUYONG", "PASIG", 14);
 
-        addEdge("TAGUIG", "PASIG", 14);
+        addEdge("TAGUIG", "PASIG", 5);
 
-        addEdge("QUEZON CITY", "MARIKINA", 25);
+        addEdge("QUEZON CITY", "MARIKINA", 9);
 
-        addEdge("MARIKINA", "PASIG", 19);
+        addEdge("MARIKINA", "PASIG", 7);
 
     }
 
-    public void printGraph() {
-        for (Map.Entry<String, ArrayList<weightedGraph>> entries : adjList.entrySet()) {
-            System.out.println(entries.getKey() + "=" + entries.getValue() + "\n");
+    // minimum spanning tree
+    public List<weightedGraph> primMST(String startVertex) {
+        // stores the list of weighted graph
+        List<weightedGraph> result = new ArrayList<>();
+        // checks the visited nodes
+        Set<String> visited = new HashSet<>();
+        // priority queue
+        // comparator sorts the objects, in this case, sorts the weights
+        PriorityQueue<weightedGraph> priorityQueue = new PriorityQueue<>(
+                Comparator.comparingInt(weightedGraph::getWeight));
+        visited.add(startVertex);
+        priorityQueue.addAll(adjList.get(startVertex));
+        while (!priorityQueue.isEmpty()) {
+            weightedGraph currentEdge = priorityQueue.poll();
+            String currentVertex = currentEdge.vertex;
+            if (!visited.contains(currentVertex)) {
+                visited.add(currentVertex);
+                result.add(currentEdge);
+
+                ArrayList<weightedGraph> neighbors = adjList.get(currentVertex);
+                priorityQueue.addAll(neighbors);
+            }
+        }
+        return result;
+    }
+
+    public void printGraph(String startVertex) {
+        System.out.println("The closest paths from " + startVertex  + " to other branches are:");
+        List<weightedGraph> mst = new ArrayList<>(primMST(startVertex));
+        for (weightedGraph edge : mst) {
+            System.out.println(startVertex + " - " + edge.vertex + " : " + edge.weight + "KM");
+            startVertex = edge.vertex; 
         }
     }
+
 }

@@ -9,24 +9,25 @@ import Customers.queueSystem;
 
 public class catClass extends superClass implements interfaceClass {
     Scanner scan = new Scanner(System.in);
-    private int amount, choice;
+    private int amount;
+    private int choice;
     queueSystem Queue = new queueSystem();
     superClass x = new superClass();
-    HashMap<String, Integer> catMedicalTests = new HashMap<>(x.getTests());
-    HashMap<String, Integer> catMedicalServices = new HashMap<>(x.getMedicalServices());
+    HashMap<Integer, Integer> catMedicalTests = new HashMap<>(x.getTests());
+    HashMap<Integer, Integer> catMedicalServices = new HashMap<>(x.getMedicalServices());
 
     @Override
-    public void pay(HashMap<String, Integer> services) {
+    public void pay(HashMap<Integer, Integer> catMedicalTests) {
         System.out.println();
         System.out.println("Enter Service:");
         System.out.println();
         System.out.print(">");
-        String service = scan.nextLine();
+        int service = scan.nextInt();
         System.out.println();
         System.out.println("Enter amount:");
         System.out.print(">");
         amount = scan.nextInt();
-        amountChecker(service, amount, services);
+        amountChecker(service, amount, catMedicalTests);
     }
 
     @Override
@@ -134,7 +135,7 @@ public class catClass extends superClass implements interfaceClass {
     }
 
     @Override
-    public void printReceipt(String service, int amount, int change) {
+    public void printReceipt(int service, int amount, int change) {
         clearScreen();
         System.out.println("RECEIPT");
         System.out.println("-----------------------------");
@@ -145,9 +146,9 @@ public class catClass extends superClass implements interfaceClass {
     }
 
     @Override
-    public void amountChecker(String service, int amount, HashMap<String, Integer> services) {
-        for (Map.Entry<String, Integer> entry : services.entrySet()) {
-            if (service.equalsIgnoreCase(entry.getKey())) {
+    public void amountChecker(int service, int amount, HashMap<Integer, Integer> services) {
+        for (Map.Entry<Integer, Integer> entry : services.entrySet()) {
+            if (service == entry.getKey()) {
                 if (amount >= entry.getValue()) {
                     int change = amount - entry.getValue();
                     printReceipt(entry.getKey(), amount, change);
@@ -160,7 +161,7 @@ public class catClass extends superClass implements interfaceClass {
         }
         System.out.println("Insufficient amount or service not available.");
         System.out.println();
-        System.out.println("Please check for Spelling errors or check if your payment is sufficient");
+        System.out.println("Please check if your payment is sufficient");
         longPause();
         pressEnterToContinue();
 
@@ -177,56 +178,33 @@ public class catClass extends superClass implements interfaceClass {
         System.out.println();
     
         // Routine Checkup
-        System.out.println("Routine Checkup");
-        System.out.println("Estimated Time: 45 minutes");
+        System.out.println("1. Routine Checkup");
         System.out.println("Description: Comprehensive health examination including physical checks and basic diagnostics.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Thorough physical examination");
-        System.out.println("      2. Basic blood tests");
         System.out.println("  - Price: $50.00");
-        System.out.println("  - Why choose Routine Checkup? Regular checkups are essential to monitor your cat's overall health and detect any potential issues early.");
+        System.out.println();
     
         // Physical Exams
-        System.out.println("\nPhysical Exams");
-        System.out.println("Estimated Time: 30 minutes");
+        System.out.println("\n2. Physical Exams");
         System.out.println("Description: Detailed examination focusing on your cat's physical condition and well-being.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Comprehensive physical assessment");
-        System.out.println("      2. Evaluation of vital signs");
         System.out.println("  - Price: $45.00");
-        System.out.println("  - Why choose Physical Exams? Physical exams help ensure your cat's overall health and identify any abnormalities or concerns.");
+        System.out.println();
     
         // Dental Checkups
-        System.out.println("\nDental Checkups");
-        System.out.println("Estimated Time: 40 minutes");
+        System.out.println("\n3. Dental Checkups");
         System.out.println("Description: Specialized examination and care for your cat's dental health.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Dental examination");
-        System.out.println("      2. Teeth cleaning");
         System.out.println("  - Price: $70.00");
-        System.out.println("  - Why choose Dental Checkups? Dental health is crucial for cats; regular checkups can prevent dental issues and ensure a healthy smile.");
+        System.out.println();
     
         // Allergy Testing
-        System.out.println("\nAllergy Testing");
-        System.out.println("Estimated Time: 60 minutes");
+        System.out.println("\n4. Allergy Testing");
         System.out.println("Description: Identification of potential allergies affecting your cat's health.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Allergy testing panel");
-        System.out.println("      2. Consultation with a veterinarian");
         System.out.println("  - Price: $300.00");
-        System.out.println("  - Why choose Allergy Testing? Understanding your cat's allergies helps in managing their health and well-being.");
+        System.out.println();
     
         // Geriatric Screening
-        System.out.println("\nGeriatric Screening");
-        System.out.println("Estimated Time: 50 minutes");
+        System.out.println("\n5.Geriatric Screening");
         System.out.println("Description: Specialized health screening for senior cats to monitor and address age-related concerns.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Geriatric health assessment");
-        System.out.println("      2. Comprehensive blood tests");
         System.out.println("  - Price: $110.00");
-        System.out.println("  - Why choose Geriatric Screening? Tailored for senior cats, this screening aids in maintaining their health and addressing age-related challenges.");
-        
-        System.out.println();
         System.out.println();
 
     }
@@ -237,43 +215,28 @@ public class catClass extends superClass implements interfaceClass {
         System.out.println();
     
         // Bloodwork
-        System.out.println("Bloodwork");
+        System.out.println("1. Bloodwork");
         System.out.println("Description: Comprehensive blood tests to assess your cat's health.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Blood sample collection");
-        System.out.println("      2. Laboratory analysis");
         System.out.println("  - Price: $200.00");
     
         // X-Rays
-        System.out.println("\nX-Rays");
+        System.out.println("\n2. X-Rays");
         System.out.println("Description: Diagnostic imaging for a detailed view of your cat's internal structures.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. X-ray imaging session");
-        System.out.println("      2. Radiologist's interpretation");
         System.out.println("  - Price: $150.00");
     
         // Ultrasounds
-        System.out.println("\nUltrasounds");
+        System.out.println("\n3. Ultrasounds");
         System.out.println("Description: Non-invasive imaging technique to visualize internal organs.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Ultrasound imaging session");
-        System.out.println("      2. Interpretation by a specialist");
         System.out.println("  - Price: $600.00");
     
         // Oxygen Therapy
-        System.out.println("\nOxygen Therapy");
+        System.out.println("\n4. Oxygen Therapy");
         System.out.println("Description: Emergency oxygen support for critical situations.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Oxygen administration");
-        System.out.println("      2. Monitoring by trained staff");
         System.out.println("  - Price: $3000.00");
     
         // Emergency Surgery
-        System.out.println("\nEmergency Surgery");
+        System.out.println("\n5. Emergency Surgery");
         System.out.println("Description: Immediate surgical intervention for critical medical conditions.");
-        System.out.println("  - Inclusions:");
-        System.out.println("      1. Surgical procedure");
-        System.out.println("      2. Anesthesia and post-operative care");
         System.out.println("  - Price: $5000.00");
     
         System.out.println();

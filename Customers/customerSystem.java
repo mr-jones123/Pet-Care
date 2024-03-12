@@ -41,7 +41,7 @@ public class customerSystem {
     public void printCustomers() {
         System.out.println("TOP TO BOTTOM");
         System.out.println();
-        if (isItEmpty() == true) {
+        if (isItEmpty()) {
             System.out.println("NO ONE HAS REGISTERED YET");
         } else {
             for (Map.Entry<String, Integer> entries : customers.entrySet()) {
