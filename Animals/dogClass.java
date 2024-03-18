@@ -1,6 +1,8 @@
 package Animals;
 
 import Interface_Super.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -8,11 +10,18 @@ import java.util.Scanner;
 import Customers.queueSystem;
 
 public class dogClass extends superClass implements interfaceClass {
-    private int amount;
     private int choice;
+    private int continueChoice;
     Scanner scan = new Scanner(System.in);
     queueSystem Queue = new queueSystem();
     superClass x = new superClass();
+
+    ArrayList<String> selectedServices = new ArrayList<>();
+    ArrayList<Integer> selectedPrices = new ArrayList<>();
+
+    HashMap<String, Integer> listOfServices = new HashMap<>(x.getListofServices());
+    HashMap<String, Integer> listOfTests = new HashMap<>(x.getListofTests());
+
     HashMap<Integer, Integer> dogMedicalTests = new HashMap<>(x.getTests());
     HashMap<Integer, Integer> dogMedicalServices = new HashMap<>(x.getMedicalServices());
 
@@ -23,17 +32,44 @@ public class dogClass extends superClass implements interfaceClass {
     }
 
     @Override
-    public void pay(HashMap<Integer, Integer> services) {
+    public int selectionOfService(HashMap<Integer, Integer> services) {
         System.out.println("Enter Service:");
         System.out.print(">");
         int service = scan.nextInt();
-        System.out.println("Enter amount:");
-        System.out.print(">");
-        amount = scan.nextInt();
-        amountChecker(service, amount, services);
+    return service;
+    
     }
 
-     @Override
+    @Override
+    public void addServiceCheckout(int serviceNumber,HashMap<Integer, Integer> services, HashMap<String, Integer> listOfServices){
+        String serviceName;
+        int servicePrice;
+        for(Map.Entry<String, Integer> entries: listOfServices.entrySet()){
+            if (serviceNumber == entries.getValue()){
+                serviceName = entries.getKey();
+                selectedServices.add(serviceName);
+            }
+        }
+        for (Map.Entry<Integer,Integer> entries: services.entrySet()){
+            if (serviceNumber == entries.getKey()){
+                servicePrice = entries.getValue();
+                selectedPrices.add(servicePrice);
+            }
+        }
+        System.out.println("Would you like to add another service?");
+        System.out.println("1 - Yes | 2 - No");
+        System.out.print(">");
+        continueChoice = scan.nextInt();
+
+        if (continueChoice == 1){
+            mainMenu();
+        } else if (continueChoice == 2){
+            Checkout checkout = new Checkout(selectedServices, selectedPrices);
+            checkout.checkoutFunction();
+        }
+    }
+    
+    @Override
     public void mainMenu() {
         while (true) {
             clearScreen();
@@ -51,12 +87,14 @@ public class dogClass extends superClass implements interfaceClass {
                 if (choice == 1) {
                     clearScreen();
                     printDogMedicalTests();
-                    pay(dogMedicalTests);
+                    int serviceNumber = selectionOfService(dogMedicalTests);
+                    addServiceCheckout(serviceNumber,dogMedicalTests , listOfTests);
                     break;
                 } else if (choice == 2) {
                     clearScreen();
-                    printDogMedicalServices();
-                    pay(dogMedicalServices);
+                    printDogMedicalTests();
+                    int serviceNumber = selectionOfService(dogMedicalServices);
+                    addServiceCheckout(serviceNumber,dogMedicalServices , listOfServices);
                     break;
 
                 } else if (choice == 3) {
@@ -65,7 +103,6 @@ public class dogClass extends superClass implements interfaceClass {
                     System.out.println();
                     pressEnterToContinue();
                 }
-
             } catch (InputMismatchException e) {
                 System.out.println("WRONG INPUT! TRY AGAIN!");
                 scan.nextLine();
@@ -136,36 +173,6 @@ public class dogClass extends superClass implements interfaceClass {
         System.out.println();
     
     }
-
-    @Override
-    public void printReceipt(int service, int amount, int change) {
-        clearScreen();
-        System.out.println("RECEIPT");
-        System.out.println("-----------------------------");
-        System.out.println();
-        System.out.println("Service: " + service);
-        System.out.println("Amount paid: $" + amount);
-        System.out.println("Change: $" + change);
-    }
-
-    @Override
-    public void amountChecker(int service,int amount, HashMap<Integer, Integer> services){
-        for (Map.Entry<Integer, Integer> entry : services.entrySet()) {
-            if (service == entry.getKey()){
-                if (amount >= entry.getValue()) {
-                    int change = amount - entry.getValue();
-                    printReceipt(service, amount, change);
-                    System.out.println();
-                    pressEnterToContinue();
-                    Queue.removeFirst();
-                    return;
-                }
-            }
-        }
-        System.out.println("Insufficient amount or service not available.");
-        longPause();
-        pressEnterToContinue();
-    } 
     private void printDogMedicalTests() {
         System.out.println("AVAILABLE TESTS FOR DOGS:");
         System.out.println();
@@ -231,18 +238,18 @@ public class dogClass extends superClass implements interfaceClass {
         System.out.println("   - Price: $2000.00");
         System.out.println();
     
-        // Add more emergency services as needed
+        // Oxygen Therapy
+        System.out.println("5. Oxygen Therapy");
+        System.out.println("   Description: Supplemental oxygen for your pet's difficult breathing.");
+        System.out.println("   - Price: $1000.00");
+        System.out.println();
     }
-    
-
-    private void longPause() {
-        try {
-            Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public ArrayList<String> getServiceNameList(){
+        return selectedServices;
     }
-
+    public ArrayList<Integer> getPriceList(){
+        return selectedPrices;
+    }
     private void pressEnterToContinue() {
         System.out.println("Press Enter to continue...");
         try {
@@ -250,4 +257,12 @@ public class dogClass extends superClass implements interfaceClass {
         } catch (Exception e) {
         }
     }
+    private void longPause() {
+        try {
+            Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+  
 }

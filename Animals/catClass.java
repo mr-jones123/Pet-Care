@@ -1,6 +1,8 @@
 package Animals;
 
 import Interface_Super.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -9,27 +11,56 @@ import Customers.queueSystem;
 
 public class catClass extends superClass implements interfaceClass {
     Scanner scan = new Scanner(System.in);
-    private int amount;
+    private int continueChoice;
     private int choice;
     queueSystem Queue = new queueSystem();
     superClass x = new superClass();
+    ArrayList<String> selectedServices = new ArrayList<>();
+    ArrayList<Integer> selectedPrices = new ArrayList<>();
+
+    HashMap<String, Integer> listOfServices = new HashMap<>(x.getListofServices());
+    HashMap<String, Integer> listOfTests = new HashMap<>(x.getListofTests());
+
     HashMap<Integer, Integer> catMedicalTests = new HashMap<>(x.getTests());
     HashMap<Integer, Integer> catMedicalServices = new HashMap<>(x.getMedicalServices());
 
     @Override
-    public void pay(HashMap<Integer, Integer> catMedicalTests) {
+    public int selectionOfService(HashMap<Integer, Integer> services) {
         System.out.println();
         System.out.println("Enter Service:");
         System.out.println();
         System.out.print(">");
         int service = scan.nextInt();
-        System.out.println();
-        System.out.println("Enter amount:");
-        System.out.print(">");
-        amount = scan.nextInt();
-        amountChecker(service, amount, catMedicalTests);
+    return service;
     }
+    @Override
+    public void addServiceCheckout(int serviceNumber,HashMap<Integer, Integer> services, HashMap<String, Integer> listOfServices){
+        String serviceName;
+        int servicePrice;
+        for(Map.Entry<String, Integer> entries: listOfServices.entrySet()){
+            if (serviceNumber == entries.getValue()){
+                serviceName = entries.getKey();
+                selectedServices.add(serviceName);
+            }
+        }
+        for (Map.Entry<Integer,Integer> entries: services.entrySet()){
+            if (serviceNumber == entries.getKey()){
+                servicePrice = entries.getValue();
+                selectedPrices.add(servicePrice);
+            }
+        }
+        System.out.println("Would you like to add another service?");
+        System.out.println("1 - Yes | 2 - No");
+        System.out.print(">");
+        continueChoice = scan.nextInt();
 
+        if (continueChoice == 1){
+            mainMenu();
+        } else if (continueChoice == 2){
+            Checkout checkout = new Checkout(selectedServices, selectedPrices);
+            checkout.checkoutFunction();
+        }
+    }
     @Override
     public void mainMenu() {
         while (true) {
@@ -48,13 +79,14 @@ public class catClass extends superClass implements interfaceClass {
                 if (choice == 1) {
                     clearScreen();
                     printCatTests();
-                    pay(catMedicalTests);
+                    int serviceNumber = selectionOfService(catMedicalTests);
+                    addServiceCheckout(serviceNumber,catMedicalTests , listOfTests);
                     break;
-
                 } else if (choice == 2) {
                     clearScreen();
                     printCatMedicalServices();
-                    pay(catMedicalTests);
+                    int serviceNumber = selectionOfService(catMedicalServices);
+                    addServiceCheckout(serviceNumber,catMedicalServices , listOfServices);
                     break;
                     
                 } else if (choice == 3) {
@@ -133,40 +165,6 @@ public class catClass extends superClass implements interfaceClass {
         System.out.println();
     
     }
-
-    @Override
-    public void printReceipt(int service, int amount, int change) {
-        clearScreen();
-        System.out.println("RECEIPT");
-        System.out.println("-----------------------------");
-        System.out.println();
-        System.out.println("Service: " + service);
-        System.out.println("Amount paid: $" + amount);
-        System.out.println("Change: $" + change);
-    }
-
-    @Override
-    public void amountChecker(int service, int amount, HashMap<Integer, Integer> services) {
-        for (Map.Entry<Integer, Integer> entry : services.entrySet()) {
-            if (service == entry.getKey()) {
-                if (amount >= entry.getValue()) {
-                    int change = amount - entry.getValue();
-                    printReceipt(entry.getKey(), amount, change);
-                    System.out.println();
-                    pressEnterToContinue();
-                    Queue.removeFirst();
-                    return;
-                }
-            }
-        }
-        System.out.println("Insufficient amount or service not available.");
-        System.out.println();
-        System.out.println("Please check if your payment is sufficient");
-        longPause();
-        pressEnterToContinue();
-
-    }
-
     @Override
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -241,7 +239,12 @@ public class catClass extends superClass implements interfaceClass {
     
         System.out.println();
     }
-
+    public ArrayList<String> getServiceNameList(){
+        return selectedServices;
+    }
+    public ArrayList<Integer> getPriceList(){
+        return selectedPrices;
+    }
     private void longPause() {
         try {
             Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
