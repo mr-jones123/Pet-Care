@@ -11,7 +11,7 @@ import Customers.queueSystem;
 
 public class catClass extends superClass implements interfaceClass {
     Scanner scan = new Scanner(System.in);
-    private int paymentAmount;
+    private int continueChoice;
     private int choice;
     queueSystem Queue = new queueSystem();
     superClass x = new superClass();
@@ -49,6 +49,17 @@ public class catClass extends superClass implements interfaceClass {
                 selectedPrices.add(servicePrice);
             }
         }
+        System.out.println("Would you like to add another service?");
+        System.out.println("1 - Yes | 2 - No");
+        System.out.print(">");
+        continueChoice = scan.nextInt();
+
+        if (continueChoice == 1){
+            mainMenu();
+        } else if (continueChoice == 2){
+            Checkout checkout = new Checkout(selectedServices, selectedPrices);
+            checkout.checkoutFunction();
+        }
     }
     @Override
     public void mainMenu() {
@@ -68,14 +79,12 @@ public class catClass extends superClass implements interfaceClass {
                 if (choice == 1) {
                     clearScreen();
                     printCatTests();
-                    selectionOfService(catMedicalTests);
                     int serviceNumber = selectionOfService(catMedicalTests);
                     addServiceCheckout(serviceNumber,catMedicalTests , listOfTests);
                     break;
                 } else if (choice == 2) {
                     clearScreen();
                     printCatMedicalServices();
-                    selectionOfService(catMedicalServices);
                     int serviceNumber = selectionOfService(catMedicalServices);
                     addServiceCheckout(serviceNumber,catMedicalServices , listOfServices);
                     break;
@@ -230,10 +239,10 @@ public class catClass extends superClass implements interfaceClass {
     
         System.out.println();
     }
-    private ArrayList<String> getServiceNameList(){
+    public ArrayList<String> getServiceNameList(){
         return selectedServices;
     }
-    private ArrayList<Integer> getPriceList(){
+    public ArrayList<Integer> getPriceList(){
         return selectedPrices;
     }
     private void longPause() {

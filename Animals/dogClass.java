@@ -11,6 +11,7 @@ import Customers.queueSystem;
 
 public class dogClass extends superClass implements interfaceClass {
     private int choice;
+    private int continueChoice;
     Scanner scan = new Scanner(System.in);
     queueSystem Queue = new queueSystem();
     superClass x = new superClass();
@@ -55,6 +56,17 @@ public class dogClass extends superClass implements interfaceClass {
                 selectedPrices.add(servicePrice);
             }
         }
+        System.out.println("Would you like to add another service?");
+        System.out.println("1 - Yes | 2 - No");
+        System.out.print(">");
+        continueChoice = scan.nextInt();
+
+        if (continueChoice == 1){
+            mainMenu();
+        } else if (continueChoice == 2){
+            Checkout checkout = new Checkout(selectedServices, selectedPrices);
+            checkout.checkoutFunction();
+        }
     }
     
     @Override
@@ -75,14 +87,12 @@ public class dogClass extends superClass implements interfaceClass {
                 if (choice == 1) {
                     clearScreen();
                     printDogMedicalTests();
-                    selectionOfService(dogMedicalTests);
                     int serviceNumber = selectionOfService(dogMedicalTests);
                     addServiceCheckout(serviceNumber,dogMedicalTests , listOfTests);
                     break;
                 } else if (choice == 2) {
                     clearScreen();
                     printDogMedicalTests();
-                    selectionOfService(dogMedicalServices);
                     int serviceNumber = selectionOfService(dogMedicalServices);
                     addServiceCheckout(serviceNumber,dogMedicalServices , listOfServices);
                     break;
@@ -234,10 +244,10 @@ public class dogClass extends superClass implements interfaceClass {
         System.out.println("   - Price: $1000.00");
         System.out.println();
     }
-    private ArrayList<String> getServiceNameList(){
+    public ArrayList<String> getServiceNameList(){
         return selectedServices;
     }
-    private ArrayList<Integer> getPriceList(){
+    public ArrayList<Integer> getPriceList(){
         return selectedPrices;
     }
     private void pressEnterToContinue() {
