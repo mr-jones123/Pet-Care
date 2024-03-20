@@ -9,6 +9,8 @@ public class superClass {
     public superClass(){
         initializeDefaultTests();
         initializeDefaultMedicalServices();
+        initalizedServicesLists();
+        initalizedTestLists();
     }
 
     public void initalizedTestLists(){

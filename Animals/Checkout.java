@@ -2,12 +2,14 @@ package Animals;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class Checkout {
     dogClass DOG = new dogClass();
     catClass CAT = new catClass();
     Scanner  scanner = new Scanner(System.in);
+    private int customerPayment;
+    private int change;
     private String petName;
     private String ownerName;
     private String contactNo;
@@ -15,10 +17,11 @@ public class Checkout {
     private int totalCost;
     private ArrayList<String> selectedServices;
     private ArrayList<Integer> selectedPrices;
-
+    // we used the new ArrayList to get the copy of the parameters
+    //so that we don't modify the original values
     public Checkout(ArrayList<String> selectedServices,ArrayList<Integer> selectedPrices ){
-        this.selectedServices = selectedServices;
-        this.selectedPrices = selectedPrices;
+        this.selectedServices = new ArrayList<>(selectedServices);
+        this.selectedPrices = new ArrayList<>(selectedPrices);
     }
 
     private void clearScreen() {
@@ -78,8 +81,17 @@ public class Checkout {
         for (int i = 0; i < selectedServices.size(); ++i) {
             totalCost += selectedPrices.get(i) * quantity;
         }
-
+        System.out.println("\t \t \t \t$  -Total Price:" + totalCost);
+        System.out.println();
+        System.out.print("\t \t \t \t$  -Enter your payment: $");
+        customerPayment = scanner.nextInt();
+        while (customerPayment < totalCost) {
+            System.out.println("  = Your payment is insufficient");
+            System.out.print("\t \t \t \t$  - Enter your payment: $");
+            customerPayment = scanner.nextInt();
+        }
         receipt();
+        
     }
     public void receipt(){
         clearScreen();
@@ -95,16 +107,16 @@ public class Checkout {
         for (int i = 0; i < selectedServices.size(); ++i) {
             System.out.println("\t \t \t \t   " + selectedServices.get(i) + ": $" + selectedPrices.get(i) + " per session");
         }
-
+        change = totalCost - customerPayment;
         System.out.println("\t \t \t \t========================================================");
         System.out.println("\t \t \t \t$  - Total Cost: $" + totalCost);
+        System.out.println("\t \t \t \t$  - Payment Amount: $" + customerPayment);
+        System.out.println("\t \t \t \t$  - Change: $" + change);
         System.out.println("\t \t \t \t========================================================");
         System.out.println("\n  = Thank you for choosing our store!");
         System.out.println("  = We look forward to serving you and your pet again!");
         System.out.println("  = Have a wonderful day!");
         System.out.println("\nPress Enter to continue...");
-
-        // Wait for Enter key press
         scanner.nextLine();
     
     }
