@@ -18,22 +18,20 @@ public class menuGraph {
                 ch = scan.nextInt();
                 switch (ch) {
                     case 1:
-                        Graph.printGraph("MANILA");
-                        break;
+                    Graph.printGraph("MANILA");
+                    break;
                     case 2:
                     Graph.printGraph("MAKATI");
-                        break;
+                    break;
                     case 3:
                     Graph.printGraph("TAGUIG");
-                        break;
-                    case 4: 
+                    break;
+                    case 4:
                     Graph.printGraph("MANDALUYONG");
-                        break;
+                    break;
                     case 5:
                     Graph.printGraph("MARIKINA");
-                        break;
-                    default:
-                        break;
+                    break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("INVALID CHARACTER");
@@ -41,5 +39,7 @@ public class menuGraph {
             }
         } while (ch != 0);
     }
+
+    
   
 }

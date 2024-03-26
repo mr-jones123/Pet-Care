@@ -16,24 +16,21 @@ public class initializeGraph {
         initializeShops();
     }
 
-    public static class weightedGraph {
+    private class weightedGraph {
         private String vertex;
+        private String adjacentVertex;
         private int weight;
 
-        public weightedGraph(String vertex, int weight) {
+        public weightedGraph(String vertex, String adjacentVertex, int weight) {
             this.vertex = vertex;
+            this.adjacentVertex = adjacentVertex;
             this.weight = weight;
         }
 
         @Override
         // ovveride the toString from Object class
         public String toString() {
-            return "(" + vertex + ", " + weight + ")";
-        }
-
-        // return weight?
-        public int getWeight() {
-            return weight;
+            return "(" + vertex + " " + adjacentVertex + "-" + weight + ")";
         }
     }
 
@@ -49,8 +46,8 @@ public class initializeGraph {
     private void addEdge(String vertex1, String vertex2, int weight) {
         // if the vertices exist, then we add edges
         if (adjList.get(vertex1) != null && adjList.get(vertex2) != null) {
-            adjList.get(vertex1).add(new weightedGraph(vertex2, weight));
-            adjList.get(vertex2).add(new weightedGraph(vertex1, weight));
+            adjList.get(vertex1).add(new weightedGraph(vertex1, vertex2, weight));
+            adjList.get(vertex2).add(new weightedGraph(vertex2, vertex1, weight));
         } else {
             System.out.println("One of the vertices does not exist");
         }
@@ -65,58 +62,67 @@ public class initializeGraph {
         addVertex("MANDALUYONG");
         addVertex("MARIKINA");
 
-        addEdge("MANILA", "QUEZON CITY", 10);
-        addEdge("MANILA", "MAKATI", 6);
-        addEdge("MANILA", "MANDALUYONG", 12);
-
-        addEdge("MAKATI", "TAGUIG", 3);
-        addEdge("MAKATI", "MANDALUYONG", 4);
-
-        addEdge("MANDALUYONG", "QUEZON CITY", 7);
-        addEdge("MANDALUYONG", "TAGUIG", 8);
-        addEdge("MANDALUYONG", "PASIG", 14);
-
-        addEdge("TAGUIG", "PASIG", 5);
-
-        addEdge("QUEZON CITY", "MARIKINA", 9);
-
-        addEdge("MARIKINA", "PASIG", 7);
+        addEdge("MANILA", "QUEZON CITY", 20);
+        addEdge("MANILA", "MANDALUYONG", 10);
+        addEdge("MANILA", "MAKATI", 17);
+        addEdge("MAKATI", "MANDALUYONG", 15);
+        addEdge("MAKATI", "TAGUIG", 7);
+        addEdge("TAGUIG", "MANDALUYONG", 16);
+        addEdge("TAGUIG", "PASIG", 13);
+        addEdge("QUEZON CITY", "MANDALUYONG", 8);
+        addEdge("QUEZON CITY", "MARIKINA", 18);
+        addEdge("PASIG", "MARIKINA", 20);
 
     }
 
-    // minimum spanning tree
-    public List<weightedGraph> primMST(String startVertex) {
-        // stores the list of weighted graph
+    // // minimum spanning tree
+    private List<weightedGraph> primMST(Map<String, ArrayList<weightedGraph>> adjList, String startVertex) {
+        // it takes hold of the weightedGraph object based off their min weights
         List<weightedGraph> result = new ArrayList<>();
-        // checks the visited nodes
+        // keep track of the visited vertices, the function stops once all vertices are
+        // visited
         Set<String> visited = new HashSet<>();
-        // priority queue
-        // comparator sorts the objects, in this case, sorts the weights
-        PriorityQueue<weightedGraph> priorityQueue = new PriorityQueue<>(
-                Comparator.comparingInt(weightedGraph::getWeight));
-        visited.add(startVertex);
-        priorityQueue.addAll(adjList.get(startVertex));
-        while (!priorityQueue.isEmpty()) {
-            weightedGraph currentEdge = priorityQueue.poll();
-            String currentVertex = currentEdge.vertex;
-            if (!visited.contains(currentVertex)) {
-                visited.add(currentVertex);
-                result.add(currentEdge);
+        /*
+         * Priority queue used to add the minimum weight to the queue. Comparator is
+         * there to specify the order of the pq, which are the weights
+         * Here, Comparator.comparingInt(w -> w.weight) creates a comparator that
+         * compares objects based on their weight field.
+         * This comparator is used to order the elements in the priority queue such that
+         * objects with smaller weights are dequeued first.
+         */
 
-                ArrayList<weightedGraph> neighbors = adjList.get(currentVertex);
-                priorityQueue.addAll(neighbors);
+        PriorityQueue<weightedGraph> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(w -> w.weight));
+        visited.add(startVertex);
+        for (weightedGraph edge : adjList.get(startVertex)) {
+            priorityQueue.offer(edge);
+        }
+
+        while (!priorityQueue.isEmpty()) {
+            weightedGraph currentEdge = priorityQueue.poll(); // man to mad 10 is polled
+            String currentVertex = currentEdge.adjacentVertex; // mandaluyong
+
+            if (!visited.contains(currentVertex)) { // if mandaluyong not visited yet
+                visited.add(currentVertex); // add mandaluyong
+                result.add(currentEdge); // add the vertex of man to mad 10 
+
+                for (weightedGraph neighbor : adjList.get(currentVertex)) {   // iterates through the edges adjacent to the current vertex
+                    if (!visited.contains(neighbor.adjacentVertex)) { // if the vertex adjacent to mandaluyong hasnt visited yet
+                        priorityQueue.offer(neighbor); // add that vertex to the pQ
+                    }
+                }
             }
         }
         return result;
     }
 
     public void printGraph(String startVertex) {
-        System.out.println("The closest paths from " + startVertex  + " to other branches are:");
-        List<weightedGraph> mst = new ArrayList<>(primMST(startVertex));
-        for (weightedGraph edge : mst) {
-            System.out.println(startVertex + " - " + edge.vertex + " : " + edge.weight + "KM");
-            startVertex = edge.vertex; 
+        int totalWeights = 0;
+        System.out.println("The Shortest Path from " + startVertex + " to other branches are : ");
+        List<weightedGraph> lists = primMST(adjList, startVertex);
+        for (weightedGraph list : lists){
+            System.out.println(list.vertex + " " + list.adjacentVertex + " " + list.weight);
+            totalWeights += list.weight;
         }
+        System.out.println("Total KM: " + totalWeights);
     }
-
 }
