@@ -103,10 +103,12 @@ public class initializeGraph {
 
             if (!visited.contains(currentVertex)) { // if mandaluyong not visited yet
                 visited.add(currentVertex); // add mandaluyong
-                result.add(currentEdge); // add the vertex of man to mad 10 
+                result.add(currentEdge); // add the vertex of man to mad 10
 
-                for (weightedGraph neighbor : adjList.get(currentVertex)) {   // iterates through the edges adjacent to the current vertex
-                    if (!visited.contains(neighbor.adjacentVertex)) { // if the vertex adjacent to mandaluyong hasnt visited yet
+                for (weightedGraph neighbor : adjList.get(currentVertex)) { // iterates through the edges adjacent to
+                                                                            // the current vertex
+                    if (!visited.contains(neighbor.adjacentVertex)) { // if the vertex adjacent to mandaluyong hasnt
+                                                                      // visited yet
                         priorityQueue.offer(neighbor); // add that vertex to the pQ
                     }
                 }
@@ -116,13 +118,30 @@ public class initializeGraph {
     }
 
     public void printGraph(String startVertex) {
-        int totalWeights = 0;
         System.out.println("The Shortest Path from " + startVertex + " to other branches are : ");
         List<weightedGraph> lists = primMST(adjList, startVertex);
-        for (weightedGraph list : lists){
-            System.out.println(list.vertex + " " + list.adjacentVertex + " " + list.weight);
-            totalWeights += list.weight;
+        for (weightedGraph list : lists) {
+            System.out.println(list.vertex + " " + list.adjacentVertex + " " + list.weight + "KM");
         }
-        System.out.println("Total KM: " + totalWeights);
     }
+
+    public int distanceBetweenCities(String startVertex, String destinationVertex) {
+        int totalDistance = 0;
+        if (startVertex.equals(destinationVertex)) {
+            System.out.println("You are already in  " + startVertex + "!");
+        } else {
+            List<weightedGraph> adjacentVertices = primMST(adjList, startVertex);
+            for (weightedGraph listofAdjacentVerticies : adjacentVertices) {
+                totalDistance += listofAdjacentVerticies.weight;
+                if (listofAdjacentVerticies.adjacentVertex.equals(destinationVertex)) {
+                    System.out.println("The total KM between " + startVertex + " and " + destinationVertex + " is "
+                            + totalDistance);
+                    break;
+                }
+            }
+        }
+    return totalDistance;
+
+    }
+
 }
