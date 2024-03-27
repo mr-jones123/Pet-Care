@@ -10,6 +10,7 @@ import java.util.Scanner;
 import Customers.queueSystem;
 
 public class dogClass extends superClass implements interfaceClass {
+    private Checkout checkout;
     private int choice;
     private int continueChoice;
     Scanner scan = new Scanner(System.in);
@@ -64,7 +65,7 @@ public class dogClass extends superClass implements interfaceClass {
         if (continueChoice == 1){
             mainMenu();
         } else if (continueChoice == 2){
-            Checkout checkout = new Checkout(selectedServices, selectedPrices);
+            checkout = new Checkout(selectedServices, selectedPrices);
             checkout.checkoutFunction();
         }
     }

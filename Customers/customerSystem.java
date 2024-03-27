@@ -5,10 +5,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Map;
 
+
+
 public class customerSystem {
     private String name;
     private int customerCode = 0;
     private HashMap<String, Integer> customers = new HashMap<>();
+    queueSystem queueSystem = new queueSystem();
     Scanner scan = new Scanner(System.in);
 
     public void registerCustomer() {
@@ -35,7 +38,6 @@ public class customerSystem {
         System.out.printf("Customer Code: %d \n", customerCode);
         System.out.println();
         customers.put(name, customerCode);
-        queueSystem queueSystem = new queueSystem();
         queueSystem.addCustomerToQueue(this.customerCode);
     }
     public void printCustomers() {

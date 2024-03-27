@@ -33,6 +33,7 @@ public class catClass extends superClass implements interfaceClass {
         int service = scan.nextInt();
     return service;
     }
+    
     @Override
     public void addServiceCheckout(int serviceNumber,HashMap<Integer, Integer> services, HashMap<String, Integer> listOfServices){
         String serviceName;
