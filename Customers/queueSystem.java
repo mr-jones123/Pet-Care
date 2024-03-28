@@ -1,46 +1,38 @@
 package Customers;
 import java.util.Queue;
+
+import Customers.customerSystem.customer;
+
 import java.util.LinkedList;
 public class queueSystem {
-    private static Queue <Integer> customerID = new LinkedList<>();
-    public void addCustomerToQueue(int customerCode){
-        customerID.add(customerCode);
+    private static Queue <customer> listOfCustomers = new LinkedList<>();
+
+    public void addCustomer(customer Customer){
+        listOfCustomers.add(Customer);
     }
-   
-    public void printQueue(){
-        if (customerID.isEmpty()){
-            System.out.println("Nobody's here yet!");
-        } else{
-            for (Integer customer : customerID){
-                System.out.print(customer + " ");
-            }
-        }
-    }
-    public void removeFirst(){
-        customerID.poll();
+    public customer removeFirst(){
+        customer removedCustomer = listOfCustomers.poll();
+        return removedCustomer;
     }    
     public int isInQueue(int customerCode){
-        if (customerID.contains(customerCode)) {
-            if (priorityCheck(customerCode)) { // if the customer code is in first index
-                return 2;
-            } else { //if customer code is in the queue but not at the first index
-                return 1;
+        customer head = listOfCustomers.peek();
+        if (head != null && head.getCustomerID() == customerCode) {
+            return 1; // customer is at the head of the queue
+        }
+        for (customer c: listOfCustomers){
+            if (c.getCustomerID() == customerCode){
+                return 2; // customer is in the queue but not at the head
             }
         }
-        return 0;
+        return 0; // customer is not in the queue
     }
-
-    public boolean priorityCheck(int customerCode){
-        int priorityCustomerNumber = customerID.peek();
-        if (priorityCustomerNumber == customerCode){
-            return true;
-        }
-        return false;
+    public customer getCurrentCustomer() {
+        return listOfCustomers.peek();
     }
-
-    public Queue<Integer> getQueue(){
-        return new LinkedList<>(customerID);
-    }
+    
+    // public Queue<Integer> getQueue(){
+    //     return new LinkedList<>(customerID);
+    // }
 
 
 }

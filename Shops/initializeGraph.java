@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class initializeGraph {
     private Map<String, ArrayList<weightedGraph>> adjList = new HashMap<>();
-
+    private int totalDistance;
     public initializeGraph() {
         initializeShops();
     }
@@ -62,19 +62,19 @@ public class initializeGraph {
         addVertex("MANDALUYONG");
         addVertex("MARIKINA");
 
-        addEdge("MANILA", "QUEZON CITY", 20);
-        addEdge("MANILA", "MANDALUYONG", 10);
+        addEdge("MANILA", "QUEZON CITY", 11);
+        addEdge("MANILA", "MANDALUYONG", 14);
         addEdge("MANILA", "MAKATI", 17);
-        addEdge("MAKATI", "MANDALUYONG", 15);
-        addEdge("MAKATI", "TAGUIG", 7);
+        addEdge("MAKATI", "MANDALUYONG", 6);
+        addEdge("MAKATI", "TAGUIG", 12);
         addEdge("TAGUIG", "MANDALUYONG", 16);
-        addEdge("TAGUIG", "PASIG", 13);
+        addEdge("TAGUIG", "PASIG", 8);
         addEdge("QUEZON CITY", "MANDALUYONG", 8);
-        addEdge("QUEZON CITY", "MARIKINA", 18);
-        addEdge("PASIG", "MARIKINA", 20);
+        addEdge("QUEZON CITY", "MARIKINA", 5);
+        addEdge("PASIG", "MARIKINA", 10);
 
     }
-
+ 
     // // minimum spanning tree
     private List<weightedGraph> primMST(Map<String, ArrayList<weightedGraph>> adjList, String startVertex) {
         // it takes hold of the weightedGraph object based off their min weights
@@ -125,8 +125,8 @@ public class initializeGraph {
         }
     }
 
-    public int distanceBetweenCities(String startVertex, String destinationVertex) {
-        int totalDistance = 0;
+    public void distanceBetweenCities(String startVertex, String destinationVertex) {
+        totalDistance = 0;
         if (startVertex.equals(destinationVertex)) {
             System.out.println("You are already in  " + startVertex + "!");
         } else {
@@ -140,8 +140,9 @@ public class initializeGraph {
                 }
             }
         }
-    return totalDistance;
-
+    }
+    public int getTotalDistance(){
+        return totalDistance; 
     }
 
 }

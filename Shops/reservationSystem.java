@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 public class reservationSystem {
+    private int hoursConvert;
+    private String formattedCurrentTime, formattedReservationTime, formattedDurationTime;
 // Reservation System
     public void reservationTime(int year, int month, int day, int hour, int minute){
         //Get the local time 
@@ -18,14 +20,14 @@ public class reservationSystem {
         long hours = durationTime.toHours();
         long minutes = durationTime.toMinutesPart();
 
-        String formattedCurrentTime = currentTime.format(formatter);
-        String formattedReservationTime = reservationTime.format(formatter); 
+        formattedCurrentTime = currentTime.format(formatter);
+        formattedReservationTime = reservationTime.format(formatter); 
         // Duration has its own format
-        String formattedDurationTime = String.format("%02d:%02d", hours, minutes);
+        formattedDurationTime = String.format("%02d:%02d", hours, minutes);
         
         
         System.out.println("Current Time: " + formattedCurrentTime);
         System.out.println("Reservation Time: " + formattedReservationTime);
-        System.out.println("Duration Time: " + formattedDurationTime);
+        hoursConvert = (int) hours;
     }
 }
