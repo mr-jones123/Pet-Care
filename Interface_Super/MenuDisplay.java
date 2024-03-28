@@ -1,5 +1,5 @@
 package Interface_Super;
-
+import Shops.*;
 import Customers.*;
 import Animals.*;
 import java.util.InputMismatchException;
@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class MenuDisplay {
     private int choice;
     private int customerCode;
+    menuGraph Graph = new menuGraph();
     customerSystem CustomerFunctions = new customerSystem();
     queueSystem QueueFunctions = new queueSystem();
     mainMenu Menu = new mainMenu();
@@ -36,12 +37,11 @@ public class MenuDisplay {
                 } else if (choice == 1) {
                     clearScreen();
                     loginDisplay();
-                    pause();
+                    pressEnterToContinue();
                     break;
                 } else if (choice == 2) {
                     clearScreen();
                     CustomerFunctions.registerCustomer();
-                    longPause();
                     pressEnterToContinue();
                 } else if (choice == 3) {
                     clearScreen();
@@ -75,11 +75,12 @@ public class MenuDisplay {
             try {
             System.out.print(">");
             this.customerCode = scan.nextInt();
-            if (QueueFunctions.isInQueue(customerCode) == 2) {
+            if (QueueFunctions.isInQueue(customerCode) == 1) {
+                Graph.shopMenu();
                 Menu.MainDisplayServices();
                 clearScreen();
                 registrationDisplay();
-            } else if (QueueFunctions.isInQueue(customerCode) == 1) {
+            } else if (QueueFunctions.isInQueue(customerCode) == 2) {
                 System.out.println("You have to wait");
                 longPause();
                 pressEnterToContinue();

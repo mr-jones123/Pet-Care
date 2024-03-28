@@ -2,7 +2,9 @@ package Animals;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import Customers.*;
+import Customers.customerSystem.customer;
+import Shops.reservationSystem;
 
 public class Checkout {
     dogClass DOG = new dogClass();
@@ -11,12 +13,14 @@ public class Checkout {
     private int customerPayment;
     private int change;
     private String petName;
-    private String ownerName;
     private String contactNo;
     private int quantity;
     private int totalCost;
     private ArrayList<String> selectedServices;
     private ArrayList<Integer> selectedPrices;
+    private customerSystem Customer = new customerSystem();
+    private queueSystem Queue = new queueSystem();
+    private reservationSystem Reserve = new reservationSystem();
     // we used the new ArrayList to get the copy of the parameters
     //so that we don't modify the original values
     public Checkout(ArrayList<String> selectedServices,ArrayList<Integer> selectedPrices ){
@@ -37,6 +41,8 @@ public class Checkout {
         System.out.println("\t \t \t \t========================================================");
 
         Scanner scanner = new Scanner(System.in);
+        Customer.printCurrentCustomer();
+
         System.out.print("\t \t \t \t$  - Pet Name: ");
         petName = scanner.nextLine();
 
@@ -45,16 +51,6 @@ public class Checkout {
             System.out.println("  = Invalid input. Pet name must contain letters only. Please enter a valid pet name.");
             System.out.print("\t \t \t \t$  - Pet Name: ");
             petName = scanner.nextLine();
-        }
-
-        System.out.print("\t \t \t \t$  - Owner Name: ");
-        ownerName = scanner.nextLine();
-
-        // Input validation for owner name (letters only)
-        while (!ownerName.matches("[a-zA-Z]+")) {
-            System.out.println("  = Invalid input. Owner name must contain letters only. Please enter a valid owner name.");
-            System.out.print("\t \t \t \t$  - Owner Name: ");
-            ownerName = scanner.nextLine();
         }
 
         System.out.print("\t \t \t \t$  - Contact No.: ");
@@ -98,12 +94,11 @@ public class Checkout {
         System.out.println("\t \t \t \t--------------------------------------------------------");
         System.out.println("\t \t \t \t||                    RECEIPT                         ||");
         System.out.println("\t \t \t \t--------------------------------------------------------");
-        System.out.println("\t \t \t \t$  - Pet Name: " + petName);
-        System.out.println("\t \t \t \t$  - Owner Name: " + ownerName);
+        System.out.println("\t \t \tReserved Date: " + Reserve.getReservationTime());
+        Customer.printCurrentCustomer();
         System.out.println("\t \t \t \t$  - Contact No.: " + contactNo);
         System.out.println("\t \t \t \t$  - Number of Sessions: " + quantity);
         System.out.println("\t \t \t \t$  - Selected Services:");
-
         for (int i = 0; i < selectedServices.size(); ++i) {
             System.out.println("\t \t \t \t   " + selectedServices.get(i) + ": $" + selectedPrices.get(i) + " per session");
         }
@@ -118,6 +113,7 @@ public class Checkout {
         System.out.println("  = Have a wonderful day!");
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
+        Queue.removeFirst();
     
     }
 }
