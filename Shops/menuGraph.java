@@ -26,16 +26,13 @@ public class menuGraph {
         System.out.println("Marikina\n");
         System.out.print(">");
         cityName = scan.nextLine().toUpperCase();
-        Set<String> cities = new HashSet<>(Arrays.asList("MANILA", "MAKATI", "TAGUIG", "MANDALUYONG", "MARIKINA"));
+        Set<String> cities = new HashSet<>(Arrays.asList("MANILA", "MAKATI", "TAGUIG", "MANDALUYONG", "MARIKINA", "PASIG"));
         if (cities.contains(cityName)){
             Graph.printGraph(cityName);
             System.out.println();
             System.out.println("Enter the your preferred branch > ");
             destinationCity = scan.nextLine().toUpperCase();
             Graph.distanceBetweenCities(cityName, destinationCity);
-
-            //total distance from the chosen city to destination city
-            int distance = Graph.distanceBetweenCities(cityName, destinationCity);
             System.out.println();
             System.out.println("Enter Date (Year-Month-Day): ");
             System.out.print(">");
@@ -52,12 +49,10 @@ public class menuGraph {
             String[] hoursParts = hours.split(":");
             int hour = Integer.parseInt(hoursParts[0]);
             int minutes = Integer.parseInt(hoursParts[1]);
-
             Reserve.reservationTime(year, month, day, hour, minutes);
             pressEnterToContinue();
         } else {
             System.out.println("Invalid city. Please enter a valid city.");
         }
     }
-   
 }

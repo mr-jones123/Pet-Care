@@ -37,12 +37,11 @@ public class MenuDisplay {
                 } else if (choice == 1) {
                     clearScreen();
                     loginDisplay();
-                    pause();
+                    pressEnterToContinue();
                     break;
                 } else if (choice == 2) {
                     clearScreen();
                     CustomerFunctions.registerCustomer();
-                    longPause();
                     pressEnterToContinue();
                 } else if (choice == 3) {
                     clearScreen();
@@ -76,12 +75,12 @@ public class MenuDisplay {
             try {
             System.out.print(">");
             this.customerCode = scan.nextInt();
-            if (QueueFunctions.isInQueue(customerCode) == 2) {
+            if (QueueFunctions.isInQueue(customerCode) == 1) {
                 Graph.shopMenu();
                 Menu.MainDisplayServices();
                 clearScreen();
                 registrationDisplay();
-            } else if (QueueFunctions.isInQueue(customerCode) == 1) {
+            } else if (QueueFunctions.isInQueue(customerCode) == 2) {
                 System.out.println("You have to wait");
                 longPause();
                 pressEnterToContinue();

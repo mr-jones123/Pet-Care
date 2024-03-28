@@ -13,6 +13,26 @@ public class customerSystem {
     private HashMap<String, Integer> customers = new HashMap<>();
     queueSystem queueSystem = new queueSystem();
     Scanner scan = new Scanner(System.in);
+    public class customer{
+        private String customerName;
+        private int customerID = 0;
+        public customer(String customerName, int customerID){
+            this.customerName = customerName;
+            this.customerID = customerID;
+        }
+        @Override
+        public String toString(){
+            return "Customer Name: " + customerName + " " + "Customer ID: " + customerID;
+        }
+        public int getCustomerID(){
+            return customerID;
+        }
+        public String getCustomerName(){
+            return customerName;
+        }
+    }
+
+
 
     public void registerCustomer() {
         System.out.println("ENTER YOUR INFORMATION");
@@ -38,7 +58,8 @@ public class customerSystem {
         System.out.printf("Customer Code: %d \n", customerCode);
         System.out.println();
         customers.put(name, customerCode);
-        queueSystem.addCustomerToQueue(this.customerCode);
+        queueSystem.addCustomer(new customer(name, customerCode));
+        
     }
     public void printCustomers() {
         System.out.println("TOP TO BOTTOM");
@@ -57,9 +78,17 @@ public class customerSystem {
     public boolean isItEmpty() {
         return customers.isEmpty();
     }
-
-    public HashMap<String, Integer> getCustomers() {
+    public void printCurrentCustomer() {
+        customer currentCustomer = queueSystem.getCurrentCustomer();
+        if (currentCustomer != null) {
+            System.out.println("\t \t \t \tCurrent customer name: " + currentCustomer.getCustomerName());
+            System.out.println("\t \t \t \tCurrent customer ID: " + currentCustomer.getCustomerID());
+        } else {
+            System.out.println("No current customer.");
+        }
+    }
+    public HashMap<String, Integer> getRegisteredCustomers() {
         return customers;
     }
-
+    
 }
