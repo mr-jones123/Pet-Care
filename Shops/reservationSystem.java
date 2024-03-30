@@ -30,4 +30,7 @@ public class reservationSystem {
         System.out.println("Reservation Time: " + formattedReservationTime);
         hoursConvert = (int) hours;
     }
+    public String getReservationTime(){
+        return formattedReservationTime;
+    }
 }

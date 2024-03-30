@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import Customers.*;
 import Customers.customerSystem.customer;
+import Shops.menuGraph;
 import Shops.reservationSystem;
 
 public class Checkout {
@@ -20,7 +21,7 @@ public class Checkout {
     private ArrayList<Integer> selectedPrices;
     private customerSystem Customer = new customerSystem();
     private queueSystem Queue = new queueSystem();
-    private reservationSystem Reserve = new reservationSystem();
+    private menuGraph Graph = new menuGraph();
     // we used the new ArrayList to get the copy of the parameters
     //so that we don't modify the original values
     public Checkout(ArrayList<String> selectedServices,ArrayList<Integer> selectedPrices ){
@@ -94,7 +95,6 @@ public class Checkout {
         System.out.println("\t \t \t \t--------------------------------------------------------");
         System.out.println("\t \t \t \t||                    RECEIPT                         ||");
         System.out.println("\t \t \t \t--------------------------------------------------------");
-        System.out.println("\t \t \tReserved Date: " + Reserve.getReservationTime());
         Customer.printCurrentCustomer();
         System.out.println("\t \t \t \t$  - Contact No.: " + contactNo);
         System.out.println("\t \t \t \t$  - Number of Sessions: " + quantity);
