@@ -81,8 +81,8 @@ public class customerSystem {
     public void printCurrentCustomer() {
         customer currentCustomer = queueSystem.getCurrentCustomer();
         if (currentCustomer != null) {
-            System.out.println("\t \t \t \tCurrent customer name: " + currentCustomer.getCustomerName());
-            System.out.println("\t \t \t \tCurrent customer ID: " + currentCustomer.getCustomerID());
+            System.out.println("\t \t \t \tCustomer name: " + currentCustomer.getCustomerName());
+            System.out.println("\t \t \t \tCustomer ID: " + currentCustomer.getCustomerID());
         } else {
             System.out.println("No current customer.");
         }

@@ -1,7 +1,7 @@
 package Interface_Super;
 
 public class titleDisplay {
-    
+
     public void TITLEDISPLAY(){
         clearScreen();
         System.out.println("\t\t\tWELCOME TO PETCARE!");

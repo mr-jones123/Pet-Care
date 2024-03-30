@@ -2,6 +2,7 @@ package Shops;
 import java.util.*;
 // HAVENT TESTED YET.
 public class menuGraph {
+  
     int ch;
     initializeGraph Graph = new initializeGraph();
     reservationSystem Reserve = new reservationSystem();
@@ -55,4 +56,5 @@ public class menuGraph {
             System.out.println("Invalid city. Please enter a valid city.");
         }
     }
+
 }
