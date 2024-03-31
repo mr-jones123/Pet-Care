@@ -55,4 +55,5 @@ public class menuGraph {
             System.out.println("Invalid city. Please enter a valid city.");
         }
     }
+        
 }

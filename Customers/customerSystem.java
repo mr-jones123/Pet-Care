@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Map;
-
-
-
 public class customerSystem {
     private String name;
     private int customerCode = 0;
@@ -35,15 +32,15 @@ public class customerSystem {
 
 
     public void registerCustomer() {
-        System.out.println("ENTER YOUR INFORMATION");
+        System.out.println("\t\t\tENTER YOUR INFORMATION");
         System.out.println();
         boolean validInput = false;
         while (!validInput) {
             try {
-                System.out.print("Enter your Name: ");
+                System.out.print("\t\t\tEnter your Name: ");
                 this.name = scan.nextLine();
                 while (this.name.trim().isEmpty()) {
-                    System.out.print("Name cannot be empty. Please enter your Name: ");
+                    System.out.print("\t\t\tName cannot be empty. Please enter your Name: ");
                     this.name = scan.nextLine();
                 }
                 validInput = true;
@@ -52,24 +49,24 @@ public class customerSystem {
             }
         }
         customerCode = customerCode + 1;
-        System.out.println("PLEASE REMEMBER YOUR CUSTOMER CODE!");
+        System.out.println("\t\t\tPLEASE REMEMBER YOUR CUSTOMER CODE!");
         System.out.println();
-        System.out.printf("Customer Name: %s \n", name);
-        System.out.printf("Customer Code: %d \n", customerCode);
+        System.out.printf("\t\t\tCustomer Name: %s \n", name);
+        System.out.printf("\t\t\tCustomer Code: %d \n", customerCode);
         System.out.println();
         customers.put(name, customerCode);
         queueSystem.addCustomer(new customer(name, customerCode));
         
     }
     public void printCustomers() {
-        System.out.println("TOP TO BOTTOM");
+        System.out.println("\t\t\tTOP TO BOTTOM");
         System.out.println();
         if (isItEmpty()) {
-            System.out.println("NO ONE HAS REGISTERED YET");
+            System.out.println("\t\t\tNO ONE HAS REGISTERED YET");
         } else {
             for (Map.Entry<String, Integer> entries : customers.entrySet()) {
-                System.out.printf("Customer Name: %s\n", entries.getKey());
-                System.out.printf("Customer Code: %d\n", entries.getValue());
+                System.out.printf("\t\t\tCustomer Name: %s\n", entries.getKey());
+                System.out.printf("\t\t\tCustomer Code: %d\n", entries.getValue());
                 System.out.println();
             }
         }
@@ -84,7 +81,7 @@ public class customerSystem {
             System.out.println("\t \t \t \tCurrent customer name: " + currentCustomer.getCustomerName());
             System.out.println("\t \t \t \tCurrent customer ID: " + currentCustomer.getCustomerID());
         } else {
-            System.out.println("No current customer.");
+            System.out.println("\t\t\tNo current customer.");
         }
     }
     public HashMap<String, Integer> getRegisteredCustomers() {
