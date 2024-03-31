@@ -4,7 +4,10 @@ public class titleDisplay {
 
     public void TITLEDISPLAY(){
         clearScreen();
-        System.out.println("\t\t\tWELCOME TO PETCARE!");
+        System.out.println("\t\t\t\r\n" + //
+                        "▒█░░▒█ █▀▀ █░░ █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ 　 ▒█▀▄▀█ █▀▀ █▀▀▄ ░▀░ ▒█▀▀█ █▀▀ ▀▀█▀▀ \r\n" + //
+                        "▒█▒█▒█ █▀▀ █░░ █░░ █░░█ █░▀░█ █▀▀ 　 ░░█░░ █░░█ 　 ▒█▒█▒█ █▀▀ █░░█ ▀█▀ ▒█▄▄█ █▀▀ ░░█░░ \r\n" + //
+                        "▒█▄▀▄█ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░░▀ ▀▀▀ 　 ░░▀░░ ▀▀▀▀ 　 ▒█░░▒█ ▀▀▀ ▀▀▀░ ▀▀▀ ▒█░░░ ▀▀▀ ░░▀░░");
         System.out.println();
         System.out.flush();
         pressEnterToContinue();        

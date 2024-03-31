@@ -27,9 +27,9 @@ public class catClass extends superClass implements interfaceClass {
     @Override
     public int selectionOfService(HashMap<Integer, Integer> services) {
         System.out.println();
-        System.out.println("Enter Service:");
+        System.out.println("\t\t\tEnter Service:");
         System.out.println();
-        System.out.print(">");
+        System.out.print("\t\t\t>");
         int service = scan.nextInt();
     return service;
     }
@@ -50,9 +50,9 @@ public class catClass extends superClass implements interfaceClass {
                 selectedPrices.add(servicePrice);
             }
         }
-        System.out.println("Would you like to add another service?");
-        System.out.println("1 - Yes | 2 - No");
-        System.out.print(">");
+        System.out.println("\t\t\tWould you like to add another service?");
+        System.out.println("\t\t\t1 - Yes | 2 - No");
+        System.out.print("\t\t\t>");
         continueChoice = scan.nextInt();
 
         if (continueChoice == 1){
@@ -64,16 +64,27 @@ public class catClass extends superClass implements interfaceClass {
     }
     @Override
     public void mainMenu() {
+        clearScreen();
         while (true) {
             clearScreen();
-            System.out.println("MEDICAL SERVICES");
-            System.out.println("=============================");
-            System.out.println("Pick the best option for your cat: ");
+            System.out.println("\t\t\t──────▄▀▄─────▄▀▄\r\n" + //
+                                "\t\t\t─────▄█░░▀▀▀▀▀░░█▄\r\n" + //
+                                "\t\t\t─▄▄──█░░░░░░░░░░░█──▄▄\r\n" + //
+                                "\t\t\t█▄▄█─█░░▀░░┬░░▀░░█─█▄▄█\r\n" + //
+                                "\t\t\t");
+            System.out.println("  __  __          _ _           _   ____                  _                 \r\n" + //
+                                " |  \\/  | ___  __| (_) ___ __ _| | / ___|  ___ _ ____   _(_) ___ ___  ___   \r\n" + //
+                                " | |\\/| |/ _ \\/ _` | |/ __/ _` | | \\___ \\ / _ \\ '__\\ \\ / / |/ __/ _ \\/ __|  \r\n" + //
+                                " | |  | |  __/ (_| | | (_| (_| | |  ___) |  __/ |   \\ V /| | (_|  __/\\__ \\  \r\n" + //
+                                " |_|  |_|\\___|\\__,_|_|\\___\\__,_|_| |____/ \\___|_|    \\_/ |_|\\___\\___||___/  \r\n" + //
+                                "                                                                            ");
+            System.out.println("==================================================================================");
+            System.out.println("\t\t\tPick the best option for your cat: ");
             System.out.println();
-            System.out.println("Press 1 - Test");
-            System.out.println("Press 2 - Emergency Service");
-            System.out.println("Press 3 - For Description");
-            System.out.print(">");
+            System.out.println("\t\t\tPress 1 - Test");
+            System.out.println("\t\t\tPress 2 - Emergency Service");
+            System.out.println("\t\t\tPress 3 - For Description");
+            System.out.print("\t\t\t>");
             try {
                 choice = scan.nextInt();    
                 scan.nextLine();
@@ -94,7 +105,7 @@ public class catClass extends superClass implements interfaceClass {
                     clearScreen();
                     printDescription();
                     System.out.println();
-                    pressEnterToContinue();
+      
                 }
 
             } catch (InputMismatchException e) {
@@ -108,8 +119,19 @@ public class catClass extends superClass implements interfaceClass {
 
     @Override
     public void printDescription() {
-        System.out.println("TESTS AND MEDICAL SERVICES DESCRIPTION");
-        System.out.println("=======================================");
+        System.out.println("   _____                                                         \r\n" + //
+                        "  (        ___  .___  _   __ `   ___    ___    ____              \r\n" + //
+                        "   `--.  .'   ` /   \\ |   /  | .'   ` .'   `  (                  \r\n" + //
+                        "      |  |----' |   ' `  /   | |      |----'  `--.               \r\n" + //
+                        " \\___.'  `.___, /      \\/    /  `._.' `.___, \\___.'              \r\n" + //
+                        "                                                                 \r\n" + //
+                        " .___                                        .                   \r\n" + //
+                        " /   `    ___    ____   ___  .___  ` \\,___, _/_   `   __.  , __  \r\n" + //
+                        " |    | .'   `  (     .'   ` /   \\ | |    \\  |    | .'   \\ |'  `.\r\n" + //
+                        " |    | |----'  `--.  |      |   ' | |    |  |    | |    | |    |\r\n" + //
+                        " /---/  `.___, \\___.'  `._.' /     / |`---'  \\__/ /  `._.' /    |\r\n" + //
+                        "                                     \\                           ");
+                        System.out.println("===================================================================");
         System.out.println();
     
         // Routine Checkup
@@ -164,7 +186,7 @@ public class catClass extends superClass implements interfaceClass {
         System.out.println("Our skilled veterinarians and medical staff are trained to handle emergencies.");
         System.out.println("Whether it's a serious injury, sudden illness, or any other emergency, rely on our team.");
         System.out.println();
-    
+        pressEnterToContinue();
     }
     @Override
     public void clearScreen() {
@@ -210,7 +232,7 @@ public class catClass extends superClass implements interfaceClass {
     
 
     private void printCatMedicalServices() {
-        System.out.println("AVAILABLE MEDICAL SERVICES FOR CATS: ");
+        System.out.println("\t\t\tAVAILABLE MEDICAL SERVICES FOR CATS: ");
         System.out.println();
     
         // Bloodwork
