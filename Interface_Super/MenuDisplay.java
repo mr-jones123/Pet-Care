@@ -17,17 +17,21 @@ public class MenuDisplay {
     public void registrationDisplay() throws Exception {
         while (true) {
             clearScreen();
-            System.out.println("REGISTRATION DISPLAY");
-            System.out.println("=========================");
-            System.out.println("Hello there!");
-            System.out.println("Have you registered?");
+            System.out.println("\t\t\t\r\n" + //
+                                "█████████████████▀███████████████████████████████████████████████████████████▀█████████████\r\n" + //
+                                "█▄─▄▄▀█▄─▄▄─█─▄▄▄▄█▄─▄█─▄▄▄▄█─▄─▄─█▄─▄▄─█▄─▄▄▀███─▄▄─█▄─▄▄▀███▄─▄███─▄▄─█─▄▄▄▄█▄─▄█▄─▀█▄─▄█\r\n" + //
+                                "██─▄─▄██─▄█▀█─██▄─██─██▄▄▄▄─███─████─▄█▀██─▄─▄███─██─██─▄─▄████─██▀█─██─█─██▄─██─███─█▄▀─██\r\n" + //
+                                "▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▀▄▄▄▄▀▄▄▀▄▄▀▀▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀");
+            System.out.println("===========================================================================================");
+            System.out.println("\t\t\tHello there!");
+            System.out.println("\t\t\tHave you registered?");
             System.out.println();
-            System.out.println("Press 1 - yes");
-            System.out.println("Press 2 - no");
-            System.out.println("Press 3 - show customers");
-            System.out.println("Press 0 - exit");
+            System.out.println("\t\t\tPress 1 - yes");
+            System.out.println("\t\t\tPress 2 - no");
+            System.out.println("\t\t\tPress 3 - show customers");
+            System.out.println("\t\t\tPress 0 - exit");
             try {
-                System.out.print(">");
+                System.out.print("\t\t\t>");
                 this.choice = scan.nextInt();
                 scan.nextLine();
                 if (choice == 0) {
@@ -51,11 +55,11 @@ public class MenuDisplay {
                     clearScreen();
                 } else if (choice < 0) {
                     System.out.println();
-                    System.out.println("You inputted a negative number! Try again");
+                    System.out.println("\t\t\tYou inputted a negative number! Try again");
                     pressEnterToContinue();
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Character! Please try again");
+                System.out.println("\t\t\tInvalid Character! Please try again");
                 scan.nextLine();
                 System.out.println();
                 pressEnterToContinue();
@@ -68,40 +72,49 @@ public class MenuDisplay {
     public void loginDisplay() throws Exception {
         while (true) {
             clearScreen();
-            System.out.println("LOGIN YOUR CUSTOMER CODE");
-            System.out.println("==============================");
+            System.out.println("\t\t\t \r\n" + //
+                                " _                    _                                      _____             _        \r\n" + //
+                                "| |                  (_)                                    /  __ \\           | |       \r\n" + //
+                                "| |      ___    __ _  _  _ __    _   _   ___   _   _  _ __  | /  \\/  ___    __| |  ___  \r\n" + //
+                                "| |     / _ \\  / _` || || '_ \\  | | | | / _ \\ | | | || '__| | |     / _ \\  / _` | / _ \\ \r\n" + //
+                                "| |____| (_) || (_| || || | | | | |_| || (_) || |_| || |    | \\__/\\| (_) || (_| ||  __/ \r\n" + //
+                                "\\_____/ \\___/  \\__, ||_||_| |_|  \\__, | \\___/  \\__,_||_|     \\____/ \\___/  \\__,_| \\___| \r\n" + //
+                                "                __/ |             __/ |                                                 \r\n" + //
+                                "               |___/             |___/                                                  \r\n" + //
+                                "");
+            System.out.println("================================================================================================");
             System.out.println();
-            System.out.println("Enter Customer Code:");
+            System.out.println("\t\t\tEnter Customer Code:");
             try {
-            System.out.print(">");
-            this.customerCode = scan.nextInt();
-            if (QueueFunctions.isInQueue(customerCode) == 1) {
-                Graph.shopMenu();
-                Menu.MainDisplayServices();
-                clearScreen();
-                registrationDisplay();
-            } else if (QueueFunctions.isInQueue(customerCode) == 2) {
-                System.out.println("You have to wait");
-                longPause();
+                System.out.print("\t\t\t>");
+                this.customerCode = scan.nextInt();
+                if (QueueFunctions.isInQueue(customerCode) == 1) {
+                    // Graph.shopMenu();
+                    Menu.MainDisplayServices();
+                    clearScreen();
+                    registrationDisplay();
+                } else if (QueueFunctions.isInQueue(customerCode) == 2) {
+                    System.out.println("\t\t\tYou have to wait");
+                    longPause();
+                    pressEnterToContinue();
+                    registrationDisplay();
+                } else if (customerCode < 0) {
+                    System.out.println("\t\t\tYou entered a negative number! Try again!");
+                    pressEnterToContinue();
+                    clearScreen();
+                } else {
+                    System.out.println("\t\t\tYour code is nowhere to be found!");
+                    longPause();
+                    pressEnterToContinue();
+                    registrationDisplay();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\t\t\tInvalid Character! Please try again");
+                scan.nextLine(); // Consume invalid input
+                System.out.println();
                 pressEnterToContinue();
-                registrationDisplay();
-            } else if (customerCode < 0) {
-                System.out.println("You entered a negative number! Try again!");
-                pressEnterToContinue();
-                clearScreen();
-            } else {
-                System.out.println("Your code is nowhere to be found!");
-                longPause();
-                pressEnterToContinue();
-                registrationDisplay();
+                continue;
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid Character! Please try again");
-            scan.nextLine();
-            System.out.println();
-            pressEnterToContinue();
-            continue;
-        }
         }
     }
 
