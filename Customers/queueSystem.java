@@ -30,9 +30,4 @@ public class queueSystem {
         return listOfCustomers.peek();
     }
     
-    // public Queue<Integer> getQueue(){
-    //     return new LinkedList<>(customerID);
-    // }
-
-
 }

@@ -2,7 +2,7 @@ package Interface_Super;
 
 public class titleDisplay {
 
-    public void TITLEDISPLAY(){
+    public titleDisplay(){
         clearScreen();
         System.out.println("\t\t\t\r\n" + //
                         "▒█░░▒█ █▀▀ █░░ █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ 　 ▒█▀▄▀█ █▀▀ █▀▀▄ ░▀░ ▒█▀▀█ █▀▀ ▀▀█▀▀ \r\n" + //

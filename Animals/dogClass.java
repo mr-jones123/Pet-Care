@@ -66,7 +66,12 @@ public class dogClass extends superClass implements interfaceClass {
             mainMenu();
         } else if (continueChoice == 2){
             checkout = new Checkout(selectedServices, selectedPrices);
+        try {
             checkout.checkoutFunction();
+        } catch (Exception e) {
+            System.out.println("\t\t\tUnexpected Error");
+        }
+           
         }
     }
     
@@ -281,12 +286,5 @@ System.out.println("============================================================
         } catch (Exception e) {
         }
     }
-    private void longPause() {
-        try {
-            Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-  
+
 }

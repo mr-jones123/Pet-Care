@@ -29,8 +29,6 @@ public class customerSystem {
         }
     }
 
-
-
     public void registerCustomer() {
         System.out.println("\t\t\tENTER YOUR INFORMATION");
         System.out.println();
@@ -58,15 +56,21 @@ public class customerSystem {
         queueSystem.addCustomer(new customer(name, customerCode));
         
     }
-    public void printCustomers() {
-        System.out.println("\t\t\tTOP TO BOTTOM");
+    public int getCustomerID(){
+        return customerCode;
+    }
+    public String getCustomerName(){
+        return name;
+    }
+    
+    public void printCustomers() {   
         System.out.println();
         if (isItEmpty()) {
             System.out.println("\t\t\tNO ONE HAS REGISTERED YET");
         } else {
             for (Map.Entry<String, Integer> entries : customers.entrySet()) {
-                System.out.printf("\t\t\tCustomer Name: %s\n", entries.getKey());
-                System.out.printf("\t\t\tCustomer Code: %d\n", entries.getValue());
+                System.out.printf("\t\t\tName: %s\n", entries.getKey());
+                System.out.printf("\t\t\tCode: %d\n", entries.getValue());
                 System.out.println();
             }
         }
@@ -75,10 +79,14 @@ public class customerSystem {
     public boolean isItEmpty() {
         return customers.isEmpty();
     }
+    public void removeOnMap(String customerName){
+        customers.remove(customerName);
+    }
+
     public void printCurrentCustomer() {
         customer currentCustomer = queueSystem.getCurrentCustomer();
         if (currentCustomer != null) {
-            System.out.println("\t \t \t \tCustomer name: " + currentCustomer.getCustomerName());
+            System.out.println("\t \t \t \tCustomer Name: " + currentCustomer.getCustomerName());
             System.out.println("\t \t \t \tCustomer ID: " + currentCustomer.getCustomerID());
         } else {
             System.out.println("\t\t\tNo current customer.");
