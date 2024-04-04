@@ -59,7 +59,12 @@ public class catClass extends superClass implements interfaceClass {
             mainMenu();
         } else if (continueChoice == 2){
             Checkout checkout = new Checkout(selectedServices, selectedPrices);
-            checkout.checkoutFunction();
+            try {
+                checkout.checkoutFunction();
+            } catch (Exception e) {
+                System.out.println("Unexpected Error!");
+            }
+            
         }
     }
     @Override

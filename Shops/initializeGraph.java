@@ -49,29 +49,28 @@ public class initializeGraph {
             adjList.get(vertex1).add(new weightedGraph(vertex1, vertex2, weight));
             adjList.get(vertex2).add(new weightedGraph(vertex2, vertex1, weight));
         } else {
-            System.out.println("One of the vertices does not exist");
+            System.out.println("\t\t\tOne of the vertices does not exist");
         }
     }
 
     private void initializeShops() {
-        addVertex("MANILA");
-        addVertex("MAKATI");
-        addVertex("TAGUIG");
-        addVertex("QUEZON CITY");
-        addVertex("PASIG");
-        addVertex("MANDALUYONG");
-        addVertex("MARIKINA");
+        addVertex("BINONDO");
+        addVertex("ERMITA");
+        addVertex("PACO");
+        addVertex("TONDO");
+        addVertex("SAMPALOC");
+        addVertex("SANTA CRUZ");
+        addVertex("PANDACAN");
+        addVertex("SANTA MESA");
 
-        addEdge("MANILA", "QUEZON CITY", 11);
-        addEdge("MANILA", "MANDALUYONG", 14);
-        addEdge("MANILA", "MAKATI", 17);
-        addEdge("MAKATI", "MANDALUYONG", 6);
-        addEdge("MAKATI", "TAGUIG", 12);
-        addEdge("TAGUIG", "MANDALUYONG", 16);
-        addEdge("TAGUIG", "PASIG", 8);
-        addEdge("QUEZON CITY", "MANDALUYONG", 8);
-        addEdge("QUEZON CITY", "MARIKINA", 5);
-        addEdge("PASIG", "MARIKINA", 10);
+        addEdge("TONDO", "BINONDO", 11);
+        addEdge("TONDO", "SANTA CRUZ", 14);
+        addEdge("SAMPALOC", "QUIAPO", 17);
+        addEdge("SAMPALOC", "SANTA MESA", 6);
+        addEdge("SAMPALOC", "SANTA CRUZ", 12);
+        addEdge("PACO", "PANDACAN", 16);
+        addEdge("PACO", "ERMITA", 13);
+        addEdge("PANDACAN", "SANTA MESA", 19);
 
     }
  
@@ -118,23 +117,23 @@ public class initializeGraph {
     }
 
     public void printGraph(String startVertex) {
-        System.out.println("The Shortest Path from " + startVertex + " to other branches are : ");
+        System.out.println("\t\t\tThe Shortest Path from " + startVertex + " to other branches are : ");
         List<weightedGraph> lists = primMST(adjList, startVertex);
         for (weightedGraph list : lists) {
-            System.out.println(list.vertex + " " + list.adjacentVertex + " " + list.weight + "KM");
+            System.out.println("\t\t\t" + list.vertex + " " + list.adjacentVertex + " " + list.weight + "MIL.");
         }
     }
 
     public void distanceBetweenCities(String startVertex, String destinationVertex) {
         totalDistance = 0;
         if (startVertex.equals(destinationVertex)) {
-            System.out.println("You are already in  " + startVertex + "!");
-        } else {
+            System.out.println("\t\t\tYou are already in have chosen your local area!");
+        } else { 
             List<weightedGraph> adjacentVertices = primMST(adjList, startVertex);
             for (weightedGraph listofAdjacentVerticies : adjacentVertices) {
                 totalDistance += listofAdjacentVerticies.weight;
                 if (listofAdjacentVerticies.adjacentVertex.equals(destinationVertex)) {
-                    System.out.println("The total KM between " + startVertex + " and " + destinationVertex + " is "
+                    System.out.println("\t\t\tThe total MIL between " + startVertex + " and " + destinationVertex + " is "
                             + totalDistance);
                     break;
                 }

@@ -89,13 +89,12 @@ public class MenuDisplay {
                 System.out.print("\t\t\t>");
                 this.customerCode = scan.nextInt();
                 if (QueueFunctions.isInQueue(customerCode) == 1) {
-                    // Graph.shopMenu();
+                    Graph.shopMenu();
                     Menu.MainDisplayServices();
                     clearScreen();
                     registrationDisplay();
                 } else if (QueueFunctions.isInQueue(customerCode) == 2) {
                     System.out.println("\t\t\tYou have to wait");
-                    longPause();
                     pressEnterToContinue();
                     registrationDisplay();
                 } else if (customerCode < 0) {
@@ -104,7 +103,7 @@ public class MenuDisplay {
                     clearScreen();
                 } else {
                     System.out.println("\t\t\tYour code is nowhere to be found!");
-                    longPause();
+
                     pressEnterToContinue();
                     registrationDisplay();
                 }
@@ -121,22 +120,6 @@ public class MenuDisplay {
     private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-    }
-
-    private void pause() {
-        try {
-            Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void longPause() {
-        try {
-            Thread.sleep(5000); // Pause for 5000 milliseconds (5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private void pressEnterToContinue() {
